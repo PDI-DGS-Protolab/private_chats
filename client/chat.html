@@ -1,0 +1,92 @@
+<head>
+  <title>chat</title>
+</head>
+ 
+<body>
+  <div class="row">
+    {{> rooms}}
+
+    
+    {{renderPage}}
+  </div>
+</body>
+
+<template name="home">
+  <div class="span6">
+    <h1>Welcome to Meteor Chat</h1>
+    <p>Please a select a room to chat in, or create a new one</p>
+  </div>
+</template>
+
+<template name="rooms">
+    <table id="rooms" class="table table-striped span6">
+      <thead>
+        <tr>
+          <th>Room Name</th>
+          <th>Messages</th>
+          <th>Last activity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+        <tbody>
+        {{#each rooms}}
+          <tr>
+            <td><a href="/rooms/{{_id}}">{{name}}</a></td>
+            <td>{{numtext}}</td>
+            <td>{{last_activity}}</td>
+            <td><button type="submit" id="{{_id}}" class="btn btn-danger pull-right delRoom">
+              <i class="icon-trash"></i> Delete Room
+            </button></td>
+          </tr>
+        {{else}}
+           <tr>
+            <td>No Rooms yet</td>  
+            <td>  </td> 
+            <td>  </td> 
+            <td>  </td>   
+          </tr>
+        {{/each}}
+        <tr>
+          <td colspan="4">
+            <input type="text" id="newroom" name="name" placeholder="Enter your chatroom name"></input>
+            <button type="submit" id="newroom" class="btn btn-primary pull-right">
+              <i class="icon-plus"></i> Create Room
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</template>
+
+<template name="room">
+  <div class="span6">
+    {{#with room}}
+      <h1>Welcome to {{name}}</h1></p>
+    {{/with }}
+      <table id="chat" class="table table-striped">
+        <tbody>
+          <tr>
+            <td colspan="3">
+                <input class="span2" type="text" id="newname" name="text" placeholder="Enter your name"></input>
+                <input type="text" id="newtext" name="text" placeholder="Enter your text"></input>
+                <button type="submit" id="newmessage" class="btn btn-primary pull-right">
+                  <i class="icon-envelope"></i> Send message
+                </button>
+            </td>
+          </tr>
+          {{#each messages}}
+            <tr>
+              <td>{{author}} :</td>
+              <td>{{text}}</td>
+            </tr>
+          {{else}}
+           <tr>
+            <td>No Messages yet</td>    
+          </tr>
+          {{/each}}
+          
+        </tbody>
+      </table>
+   
+  </div>
+</template>
