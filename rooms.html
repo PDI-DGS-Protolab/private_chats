@@ -16,19 +16,11 @@
         </tr>
     </thead>
     <tbody>
-      
+      {{#each rooms}}
       <tr>
-          <td>room1</td>
+          <td>{{url}}</td>
       </tr>
-        <tr>
-          <td>room2</td>
-        </tr>
-        <tr>
-          <td>room3</td>
-        </tr>
-        <tr>
-          <td>room4</td>
-        </tr>
+      {{/each}}
     </tbody>
 </table>
  </div>
@@ -43,7 +35,6 @@
 
       <td>
           <button type="submit" class="joinButton">Join</button>
-        
       </td>
 
     </table>

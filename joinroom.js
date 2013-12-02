@@ -3,15 +3,15 @@ if (Meteor.isClient) {
   
 
   Template.joinroom.events({
-     'click button#joinRoom': function () {
+     'click button.centerButton': function () {
         var newUrl= document.getElementById('newUrl');
-        if(newName.value != ''){
+        if(newUrl.value != ''){
           Rooms.insert({
-            nameId: 'id',
+            nameId:Session.get('currentUserId') ,
             url: newUrl.value
           });
-        }
-        page('/rooms/'+Session.get('currentUserId'));
+          page('/rooms/'+Session.get('currentUserId'));
+        }  
     }
   });
 

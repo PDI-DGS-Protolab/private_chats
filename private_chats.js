@@ -7,9 +7,9 @@ if (Meteor.isClient) {
     '/rooms/:id': function(id) {
      Session.set('currentUserId', id);
      return 'rooms' },
-    '/join-room/:id':function(id) {
+    '/join-room/:id': function(id) {
      Session.set('currentUserId', id);
-     return 'joinroom' },
+     return 'joinroom' } ,
   });
 
 }
