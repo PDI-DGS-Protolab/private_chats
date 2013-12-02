@@ -1,0 +1,49 @@
+<template name="rooms">
+  <div class="topBar">
+      <div class="divButtonBack">
+          <a class="backButton" href="{{homepagePath}}"><span>Back</span></a>    
+      </div>
+      <div class="titleBox">Welcome Name...</div>
+  </div>
+
+   <div class="divRoomTable"> 
+<table id="newspaper-a" summary="Available Rooms">
+    <thead>
+      <tr>
+          <th scope="col">Rooms</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>room1</td>
+        </tr>
+        <tr>
+          <td>room2</td>
+        </tr>
+        <tr>
+          <td>room3</td>
+        </tr>
+        <tr>
+          <td>room4</td>
+        </tr>
+    </tbody>
+</table>
+ </div>
+
+  <div class="bottomBar">
+    <table class="center">
+      <td>
+        <form action="{{homepagePath}}">
+          <button class="createButton">Create</button>
+        </form>
+      </td>
+
+      <td>
+        <form action="{{homepagePath}}">
+          <button type="submit" class="joinButton">Join</button>
+        </form>
+      </td>
+
+    </table>
+  </div>
+</template>
