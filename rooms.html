@@ -3,7 +3,9 @@
       <div class="divButtonBack">
           <a class="backButton" href="{{homepagePath}}"><span>Back</span></a>    
       </div>
-      <div class="titleBox">Welcome Name...</div>
+      {{#with user}}
+      <div class="titleBox">Welcome {{name}}</div>
+      {{/with }}
   </div>
 
    <div class="divRoomTable"> 
@@ -14,9 +16,10 @@
         </tr>
     </thead>
     <tbody>
+      
       <tr>
           <td>room1</td>
-        </tr>
+      </tr>
         <tr>
           <td>room2</td>
         </tr>
@@ -39,9 +42,8 @@
       </td>
 
       <td>
-        <form action="{{homepagePath}}">
           <button type="submit" class="joinButton">Join</button>
-        </form>
+        
       </td>
 
     </table>
