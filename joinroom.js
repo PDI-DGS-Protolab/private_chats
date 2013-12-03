@@ -14,7 +14,7 @@ if (Meteor.isClient) {
           arrayObj = {"server":newUrl.value}
           servers.push(arrayObj);
           localStorage.servers = JSON.stringify(servers);
-          page('/rooms/'+Session.get('currentUserId'));
+          document.location.href = document.location.href + 'rooms';
         }  
     }
   });
