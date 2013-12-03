@@ -14,7 +14,7 @@ if (Meteor.isClient) {
 
   Template.rooms.events({
      'click button.joinButton': function () {
-        page('/join-room/'+Session.get('currentUserId'));
+          document.location.href = document.location.href + 'join-room';
       }  
     
   });
