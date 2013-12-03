@@ -4,7 +4,7 @@
           <a class="backButton" href="{{homepagePath}}"><span>Back</span></a>    
       </div>
       {{#with user}}
-      <div class="titleBox">Welcome {{name}}</div>
+      <div class="titleBox">Welcome {{user}}</div>
       {{/with }}
   </div>
 
@@ -18,7 +18,7 @@
     <tbody>
       {{#each rooms}}
       <tr>
-          <td>{{url}}</td>
+          <td>{{server}}</td>
       </tr>
       {{/each}}
     </tbody>
