@@ -13,10 +13,14 @@ if (Meteor.isClient) {
   };
 
   Template.rooms.events({
-     'click button.joinButton': function () {
-          document.location.href = document.location.href + 'join-room';
-      }  
-    
+     'click button.joinButton': function () {      
+        Router.go('joinroom');
+      },
+
+      'click a.backButton': function () {
+        localStorage.removeItem('name');
+        Router.go('homepage');
+      }
   });
 
   

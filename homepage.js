@@ -7,8 +7,8 @@ if (Meteor.isClient) {
   // });
 
   Template.homepage.rendered = function () {
-    if (localStorage.name != null) {
-      document.location.href = document.location.href + 'rooms';
+    if (localStorage.name != null) {     
+      Router.go('rooms');
     }
   };
 
@@ -16,8 +16,8 @@ if (Meteor.isClient) {
       'click button.centerButton': function () {
         var newName= document.getElementById('username');
         if(newName.value != ''){
-          localStorage.name = newName.value;
-          document.location.href = document.location.href + 'rooms';
+          localStorage.name = newName.value;     
+        Router.go('rooms');
         }
       }
   });
