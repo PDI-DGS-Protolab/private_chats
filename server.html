@@ -1,13 +1,42 @@
 <head>
-  <title>server</title>
+    <title>Private Chats!</title>
 </head>
 
 <body>
-  {{> hello}}
+  {{renderPage}}
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="messagesList">
+  <div class="topBar">
+      <div class="divButtonBack">
+          <a class="backButton" href="{{backButton}}"><span>Back</span></a>    
+      </div>
+      {{#with user}}
+      <div class="titleBox">Welcome {{user}}</div>
+      {{/with }}
+  </div>
+
+   <div class="divRoomTable"> 
+<table id="newspaper-a" summary="Available Rooms">
+    <tbody>
+      {{#each messages}}
+       <tr>
+          <td>{{author}} :</td>
+          <td>{{text}}</td>
+        </tr>
+      {{else}}
+        <tr>
+          <td>No Messages yet</td>    
+        </tr>
+      {{/each}} 
+       <tr>
+        <td colspan="2">
+            <input type="text" class="textMessage" id="newtext" name="text" placeholder="Enter your text"></input>
+            <button type="submit" id="newmessage" id="joinRoom" class="sendButton">Send
+            </button>
+        </td>
+      </tr>     
+    </tbody>
+</table>
+ </div>
 </template>
