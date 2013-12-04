@@ -4,31 +4,30 @@
           <a class="backButton"><span>Back</span></a>    
       </div>
       {{#with user}}
-      <div class="titleBox">Welcome {{user}}</div>
+      <div class="titleBox">Welcome {{user}} - Rooms list</div>
       {{/with }}
   </div>
 
    <div class="divRoomTable"> 
-<table id="newspaper-a" summary="Available Rooms">
-    <thead>
-      <tr>
-          <th scope="col">Rooms<br>Name:</th>
-          <th><br>Url:</th>
-          <th></th>
+    <table id="newspaper-a" summary="Available Rooms">
+      <tbody>
+        {{#each rooms}}
+        <tr>
+            <td>
+              <div class="divTextRoom">
+                <a class="nameRoom">{{serverName}}</a>
+                <br>
+                <a class="urlRoom">{{server}}</a>
+              </div>
+              <div class="divDelRoom">
+                <button id="{{server}}" class="delRoom">Delete</button>
+              </div>              
+            </td>
         </tr>
-    </thead>
-    <tbody>
-      {{#each rooms}}
-      <tr>
-          <td>{{serverName}}</td>
-          <td>{{server}}</td>
-          <td><button id="{{server}}" class="delRoom">Delete</button></td>
-      </tr>
-      {{/each}}
-    </tbody>
-</table>
- </div>
-
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
   <div class="bottomBar">
     <table class="center">
       <td>
