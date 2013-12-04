@@ -1,7 +1,7 @@
 <template name="rooms">
   <div class="topBar">
       <div class="divButtonBack">
-          <a class="backButton"><span>Back</span></a>    
+          <a class="backButton" ><span>Back</span></a>    
       </div>
       {{#with user}}
       <div class="titleBox">Welcome {{user}} - Rooms list</div>
@@ -15,9 +15,9 @@
         <tr>
             <td>
               <div class="divTextRoom">
-                <a class="nameRoom">{{serverName}}</a>
+                <a href="{{server}}" class="nameRoom">{{serverName}}</a>
                 <br>
-                <a class="urlRoom">{{server}}</a>
+                <a href="{{server}}" class="urlRoom">{{server}}</a>
               </div>
               <div class="divDelRoom">
                 <button id="{{server}}" class="delRoom">X</button>
@@ -42,4 +42,7 @@
 
     </table>
   </div>
+  {{#each urls}}
+        {{name}} : localhost:3000/room/{{_id}}<br><br>
+      {{/each}}
 </template>

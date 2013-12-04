@@ -40,6 +40,35 @@
     float:center;
     padding-top: 45px; /*Tiene que depender del size del topBar*/
 }
+.textMessage{
+    width: 70%;
+    padding: 2px;
+    height: 30px;
+    font-size: 15px;
+    float:left;
+}
+button.sendButton{
+    width:15%;
+    min-width: 65px; 
+    height: 35px;
+    font-size: 10px;
+    margin-left: 2px;
+    border-color: #b50007;
+    background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
+    background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 0.25em;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
 
 a.backButton {
     background: #950006;
