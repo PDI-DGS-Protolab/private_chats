@@ -24,6 +24,28 @@
     float:center;
 }
 
+.delRoom{
+    border-color: #b50007;
+    background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
+    background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 0.25em;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    float:right;
+    background-color:  #0080ff;
+    color: white;
+}
+
 a.backButton {
     background: #950006;
     background: -moz-linear-gradient(top, #de0009 0%, #950006 100%);

@@ -12,13 +12,17 @@
 <table id="newspaper-a" summary="Available Rooms">
     <thead>
       <tr>
-          <th scope="col">Rooms</th>
+          <th scope="col">Rooms<br>Name:</th>
+          <th><br>Url:</th>
+          <th></th>
         </tr>
     </thead>
     <tbody>
       {{#each rooms}}
       <tr>
+          <td>{{serverName}}</td>
           <td>{{server}}</td>
+          <td><button id="{{server}}" class="delRoom">Delete</button></td>
       </tr>
       {{/each}}
     </tbody>

@@ -20,6 +20,20 @@ if (Meteor.isClient) {
       'click a.backButton': function () {
         localStorage.removeItem('name');
         Router.go('homepage');
+      },
+      'click button.delRoom':function(e){
+        var servers = JSON.parse(localStorage.servers);
+        var url = e.currentTarget.id;
+        var newServers =  new Array();
+
+        for(var i =0;i<servers.length;i++){
+          if(servers[i].server!==url){
+            newServers.push(servers[i]);
+          }
+        }
+        localStorage.servers = JSON.stringify(newServers);
+        Router.go('joinroom');
+        Router.go('rooms');
       }
   });
 
