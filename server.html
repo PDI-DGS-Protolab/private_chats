@@ -3,17 +3,16 @@
 </head>
 
 <body>
-  {{renderPage}}
+  {{> messagesList}}
 </body>
 
 <template name="messagesList">
   <div class="topBar">
       <div class="divButtonBack">
-          <a class="backButton" href="{{backButton}}"><span>Back</span></a>    
+          <a class="backButton" href="{{backButton}}"><span>Back</span></a>
       </div>
-      {{#with user}}
-      <div class="titleBox">Welcome {{user}}</div>
-      {{/with }}
+       <!--get actual name Room -->
+      <div class="titleBox">Room 1</div>
   </div>
 
    <div class="divRoomTable"> 
@@ -26,13 +25,14 @@
         </tr>
       {{else}}
         <tr>
-          <td>No Messages yet</td>    
+          <td>No Messages yet</td>
+          <td></td>    
         </tr>
       {{/each}} 
        <tr>
         <td colspan="2">
-            <input type="text" class="textMessage" id="newtext" name="text" placeholder="Enter your text"></input>
-            <button type="submit" id="newmessage" id="joinRoom" class="sendButton">Send
+            <input type="text" class="textMessage" id="newtext" name="text" placeholder="Enter your message"></input>
+            <button type="submit" id="newmessage" class="sendButton">Send
             </button>
         </td>
       </tr>     

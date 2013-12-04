@@ -1,10 +1,6 @@
-Messages = new Meteor.Collection('messages');
-
 if (Meteor.isClient) {
 
-  Meteor.Router.add({
-  '/': 'messagesList',
-});
+  
 
   Template.messagesList.helpers({
       messagesList: function() { return Messages.find({},{sort :{time: 1}}); }
