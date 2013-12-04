@@ -12,6 +12,9 @@ if (Meteor.isClient) {
       else return JSON.parse(localStorage.servers);
   };
 
+  Template.rooms.urls=function(){
+    return Rooms.find();
+  };
   Template.rooms.events({
      'click button.joinButton': function () {      
         Router.go('joinroom');

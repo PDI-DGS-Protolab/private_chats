@@ -1,0 +1,35 @@
+<template name="room">
+  <div class="topBar">
+      <div class="divButtonBack">
+          <a class="backButton" href="{{pathFor 'room'}}"><span>Back</span></a>
+      </div>
+       {{#with info}}
+      <div class="titleBox">{{name}}</div>
+      {{/with}}
+  </div>
+
+   <div class="divRoomTable"> 
+<table id="newspaper-a" summary="Available Rooms">
+    <tbody>
+      {{#each messages}}
+       <tr>
+          <td>{{author}} :</td>
+          <td>{{text}}</td>
+        </tr>
+      {{else}}
+        <tr>
+          <td>No Messages yet</td>
+          <td></td>    
+        </tr>
+      {{/each}} 
+       <tr>
+        <td colspan="2">
+            <input type="text" class="textMessage" id="newtext" name="text" placeholder="Enter your message"></input>
+            <button type="submit" id="newmessage" class="sendButton">Send
+            </button>
+        </td>
+      </tr>     
+    </tbody>
+</table>
+ </div>
+</template>

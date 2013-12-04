@@ -12,4 +12,11 @@ Router.map( function () {
   this.route('joinroom', {
     path: 'join-room'
   });
+
+  this.route('room',{
+    path: '/room/:_id',
+    load: function() {
+        Session.set('currentRoomId', this.params._id);
+      }  
+  });
 });
