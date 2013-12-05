@@ -1,13 +1,12 @@
 /* CSS declarations go here */
 .topBar {
-    background: #434346;
-    font-family: Arial, Helvetica, sans-serif;
+    background: #005195;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 12px;
     padding: 10px;
     min-height: 32px;
-    color:white;
+    color:black;
     text-align:center;
-
     display: block;
     left: 0;
     position: fixed;
@@ -20,7 +19,7 @@
     float:center;
     padding:8px 8px 8px 8px;
     font-size: 14px;
-    color: #fff;
+    color: white;
     font-weight: bold;
     position: center;
 }
@@ -29,33 +28,27 @@
     float:left;
 }
 
+.divButtonCreate{
+    float:left;
+}
+
+.divButtonJoin{
+    float:right;
+}
+
+
 .divRoomTable{
     float:center;
-    padding-top: 48px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
-
-.delRoom{
-    border-color: #b50007;
-    background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
-    background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
-    background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);
-    background: linear-gradient(-45deg, #de0009 0%, #950006 100%);
-    -moz-border-radius: 0 5px 5px 0;
-    -webkit-border-radius: 0 5px 5px 0;
-    border-radius: 0 5px 5px 0;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.1) inset;
-    border-radius: 0.25em;
-    cursor: pointer;
-    display: inline-block;
-    font-weight: bold;
-    text-align: center;
-    white-space: nowrap;
-    float:right;
-    background-color:  #0080ff;
-    color: white;
+.textMessage{
+    width: 70%;
+    padding: 2px;
+    height: 30px;
+    font-size: 15px;
+    float:left;
 }
-
 button.sendButton{
     width:15%;
     min-width: 65px; 
@@ -77,13 +70,6 @@ button.sendButton{
     font-size: 20px;
     font-weight: bold;
     color: white;
-}
-.textMessage{
-    width: 70%;
-    padding: 2px;
-    height: 30px;
-    font-size: 15px;
-    float:left;
 }
 
 a.backButton {
@@ -159,12 +145,12 @@ a.backButton span {
 
 
 button.centerButton,button.createButton,button.joinButton {        
-    border-color: #b50007;
-    background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
-    background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
-    background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);
-    background: linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    border-color: #0078de;
+    background: -moz-linear-gradient(-45deg, #0078de 0%, #005195 100%);
+    background: -o-linear-gradient(-45deg, #0078de 0%, #005195 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #0078de), color-stop(100%, #005195));
+    background: -webkit-linear-gradient(-45deg, #0078de 0%, #005195 100%);
+    background: linear-gradient(-45deg, #0078de 0%, #005195 100%);
     -moz-border-radius: 0 5px 5px 0;
     -webkit-border-radius: 0 5px 5px 0;
     border-radius: 0 5px 5px 0;
@@ -181,7 +167,7 @@ button.centerButton,button.createButton,button.joinButton {
     white-space: nowrap;
     background-color:  #0080ff;
     color: white;
-    min-width: 90%;
+    width: 90%;
     height: 50px;
 }
 button.createButton,button.joinButton{
@@ -191,38 +177,74 @@ button.createButton,button.joinButton{
 
 table.center{
     text-align:center;
-    margin-left:auto; 
-    margin-right:auto;
+    margin-left:5px; 
+    margin-right:5px;
 }
 
+
 button.centerButton:hover,button.centerButton:focus,button.createButton:hover,button.createButton:focus,button.joinButton:hover,button.joinButton:focus {
-    background: -moz-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
-    background: -o-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #b50007), color-stop(100%, #7e0004));
-    background: -webkit-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
-    background: linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+    background: -moz-linear-gradient(-45deg, #005195 0%, #0078de 100%);
+    background: -o-linear-gradient(-45deg,  #005195 0%, #0078de 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #005195), color-stop(100%, #0078de));
+    background: -webkit-linear-gradient(-45deg,  #005195 0%, #0078de 100%);
+    background: linear-gradient(-45deg, #005195 0%, #0078de 100%);
 }
 button.centerButton:active,button.createButton:active,button.joinButton:active {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
 }
 
+.delRoom{
+    border-color: #b50007;
+    background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
+    background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    padding: 6px 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    float:right;
+    background-color:  #0080ff;
+    color: white;
+}
+
+
+a.delRoom:hover, a.delRoom:focus {
+    border-color: #b50007;
+    background: #7e0004;
+    background: -moz-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: -o-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b50007), color-stop(100%, #7e0004));
+    background: -webkit-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: linear-gradient(top, #b50007 0%, #7e0004 100%);
+}
+
 .centerBox{
     width: 99%;
-    padding:5px;
     text-align:center;
+    padding-top:50%;
 }
 
 .bottomBar{
-    margin:50px 0 0 0;
-    background: #434346;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    padding: 10px 10px 10px 10px;
+    background: #c7d7ff;
     height: auto;
-    color:white;
+    color:black;
     text-align:center;
+    display: block;
+    left: 0;
+    position: fixed;
+    bottom: 0;
+    vertical-align: baseline;
+    width: 100%;
 }
-
 
 .inputLogin{
     width:90%;
@@ -230,42 +252,85 @@ button.centerButton:active,button.createButton:active,button.joinButton:active {
     height: 30px;
     font-size: 15px;
 }
+
+a {
+    text-decoration: none;
+}
+
+a span.nameRoom {
+    font-weight: bold;
+    font-size: 17px; 
+    text-decoration: none; 
+
+    color: black;
+}
+
+a span.urlRoom {
+    color: black;
+    font-size: 12px;
+    text-decoration: none;
+    font-style:italic;
+}
+
+.divDelRoom {
+    float:right;
+    padding:10px;
+}
+
 #newspaper-a
 {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 12px;
-    margin: 5px 5px 5px 5px;
-    width: 98%;
+    width: 100%;
     text-align: left;
-    border-collapse: collapse;
-    border: 1px solid #69c;
+
 }
-#newspaper-a th
-{
-    padding: 12px 17px 12px 17px;
-    font-weight: normal;
-    font-size: 14px;
-    color: #039;
-    border-bottom: 1px dashed #69c;
-}
+
 #newspaper-a td
 {
     padding: 7px 17px 7px 17px;
     color: #669;
+    border-bottom: 1px solid #434346;
 }
+
+#newspaper-a tbody tr:nth-child(even) td
+{
+    background: #e8edff; 
+}
+
 #newspaper-a tbody tr:hover td
 {
     color: #339;
     background: #d0dafd;
 }
+
+.eachRoom
+{
+    clear: both; 
+    border-bottom:1px solid black; 
+    width:100%; 
+    height:60px;
+}
+
+.eachRoom:hover
+{
+    background-color: #B8B8B8;
+}
+
+.contentRooms
+{
+    width:100%;
+}
+
+
 /*SPECIFIC CSS For iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 /* Styles */
-
-
-
-
-
+.divTextRoom {
+    float:left;
+    width:85%; 
+    padding:10px;
+}
 
 .messageBox{}
 .liRooms{}
@@ -279,8 +344,33 @@ button.centerButton:active,button.createButton:active,button.joinButton:active {
 /*SPECIFIC CSS For Mobile (portrait and landscape)*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 /* Styles */
-.topBar{}
-.titleBox{}
+.divTextRoom {
+    float:left;
+    width:75%; 
+    padding:10px;
+}
+
+.topBar{
+    background: #950051;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 15px;
+    padding: 10px;
+    min-height: 30px;
+    color:black;
+    text-align:center;
+    display: block;
+    left: 0;
+    position: fixed;
+    top: 0;
+    vertical-align: baseline;
+    width: 100%;
+    margin-bottom:20px;
+}
+
+.titleBox{
+
+}
+
 .centerBox{}
 .bottomBar{}
 .messageBox{}
@@ -290,4 +380,14 @@ button.centerButton:active,button.createButton:active,button.joinButton:active {
 .joinButton{}
 .centerButton{}
 .sendButton{}
+}
+
+
+@media only screen and (min-device-width:1024px) {
+    
+.divTextRoom {
+    float:left;
+    width:95%; 
+    padding:10px;
+}
 }
