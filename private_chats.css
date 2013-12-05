@@ -38,7 +38,8 @@
 
 .divRoomTable{
     float:center;
-    padding-top: 45px; /*Tiene que depender del size del topBar*/
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .textMessage{
     width: 70%;
@@ -175,9 +176,8 @@ button.createButton,button.joinButton{
 
 table.center{
     text-align:center;
-    margin-left:10px; 
-    margin-right:10px;
-    width:97%;
+    margin-left:5px; 
+    margin-right:5px;
 }
 
 
@@ -233,7 +233,6 @@ a.delRoom:hover, a.delRoom:focus {
 }
 
 .bottomBar{
-    margin:20px 0 0 0;
     background: #c7d7ff;
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 12px;
@@ -241,6 +240,12 @@ a.delRoom:hover, a.delRoom:focus {
     height: auto;
     color:black;
     text-align:center;
+    display: block;
+    left: 0;
+    position: fixed;
+    bottom: 0;
+    vertical-align: baseline;
+    width: 100%;
 }
 
 .inputLogin{
