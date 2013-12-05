@@ -41,19 +41,17 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
 .textMessage{
-    width: 70%;
     padding: 2px;
-    height: 30px;
     font-size: 15px;
-    float:left;
+    height: 100%;
+    width: 100%;
 }
 button.sendButton{
-    width:15%;
-    min-width: 65px; 
-    height: 35px;
-    font-size: 10px;
-    margin-left: 2px;
+    height: 100%;
+    width: 100%;
+    font-size: 15px;
     border-color: #b50007;
     background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
     background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
@@ -66,7 +64,6 @@ button.sendButton{
     border-radius: 0.25em;
     cursor: pointer;
     display: inline-block;
-    font-size: 20px;
     font-weight: bold;
     color: white;
 }
@@ -234,9 +231,6 @@ a.delRoom:hover, a.delRoom:focus {
 
 .bottomBar{
     background: #c7d7ff;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;
-    padding: 5px 5px 5px 5px;
     height: auto;
     color:black;
     text-align:center;
@@ -267,6 +261,20 @@ a.delRoom:hover, a.delRoom:focus {
 .divTextRoom {
     float:left;
 
+}
+
+.divTextMessage{
+    float: left;
+    min-width: 70%;
+    width: 80%;
+    margin: 2px;
+}
+
+.divSendButton {
+    float: right;
+    min-width: 55px;
+    width: 15%;
+    margin: 2px;
 }
 
 .divDelRoom {
