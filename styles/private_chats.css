@@ -252,10 +252,12 @@ a.delRoom:hover, a.delRoom:focus {
 .nameRoom {
     font-weight: bold;
     font-size: 15px;  
+    cursor:pointer;
 }
 
 .urlRoom {
     font-size: 10px;
+    cursor:pointer;
 }
 
 .divTextRoom {

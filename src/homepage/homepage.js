@@ -10,8 +10,8 @@ if (Meteor.isClient) {
       'click button.centerButton': function () {
         var newName= document.getElementById('username');
         if(newName.value != ''){
-          localStorage.name = newName.value;     
-        Router.go('rooms');
+          localStorage.name = newName.value; 
+          Router.go('rooms');
         }
       }
   });
