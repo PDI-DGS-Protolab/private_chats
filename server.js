@@ -1,6 +1,7 @@
 if (Meteor.isClient) {
 
   
+  
 
   Template.messagesList.helpers({
       messagesList: function() { return Messages.find({},{sort :{cont: 1}}); }
@@ -8,6 +9,14 @@ if (Meteor.isClient) {
 
   Template.messagesList.messages = function(){
     return Messages.find({},{sort : {cont: 1}});
+  };
+
+  Template.messagesList.user = function(){
+      var username=document.cookie;
+      var getCookieResult=username.split("nameForChatApp=");
+      var clearedName = getCookieResult[1].split(";");
+      var name = clearedName[0];
+      return name;
   };
 
   Template.messagesList.backButton=function(){
@@ -25,7 +34,7 @@ if (Meteor.isClient) {
         });
         if(newName.value != '' && newText.value != ''){
           Messages.insert({
-            author: newName,
+            author: 'Jose',
             text: newText.value,
             time: Session.get("time"),
             cont: contador,

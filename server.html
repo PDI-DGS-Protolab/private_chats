@@ -18,8 +18,10 @@
           <a class="backButton" href="#" onclick="goBack();return false;"><span>Back</span></a>
       </div>
        <!--get actual name Room -->
-      <div class="titleBox">Room 1</div>
-  </div>
+       {{#with user}}
+      <div class="titleBox">Room 1 - {{user}}</div>
+      {{/with }} 
+      </div>
 
    <div class="divRoomTable"> 
 <table id="newspaper-a" summary="Available Rooms">
