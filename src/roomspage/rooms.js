@@ -35,8 +35,9 @@ if (Meteor.isClient) {
           }
         }
         localStorage.servers = JSON.stringify(newServers);
-        Router.go('joinroom');
-        Router.go('rooms');
+        location.reload(true);
+        //Router.go('joinroom');
+        //Router.go('rooms');
       }
   });
 
