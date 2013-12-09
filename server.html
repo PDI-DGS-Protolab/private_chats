@@ -1,5 +1,10 @@
 <head>
     <title>Private Chats!</title>
+     <script>
+      function goBack() {
+          window.history.back()
+      }
+    </script>
 </head>
 
 <body>
@@ -7,9 +12,10 @@
 </body>
 
 <template name="messagesList">
+   
   <div class="topBar">
       <div class="divButtonBack">
-          <a class="backButton" href="{{backButton}}"><span>Back</span></a>
+          <a class="backButton" href="#" onclick="goBack();return false;"><span>Back</span></a>
       </div>
        <!--get actual name Room -->
       <div class="titleBox">Room 1</div>
@@ -32,13 +38,10 @@
     </tbody>
 </table>
  <div class="bottomBar">
-    <table class="center">
-      <td colspan="2">
+   
             <input type="text" class="textMessage" id="newtext" name="text" placeholder="Enter your message"></input>
             <button type="submit" id="newmessage" class="sendButton">Send
             </button>
-      </td>
-    </table>
   </div>
  </div>
 </template>

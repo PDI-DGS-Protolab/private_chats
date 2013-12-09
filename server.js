@@ -3,11 +3,11 @@ if (Meteor.isClient) {
   
 
   Template.messagesList.helpers({
-      messagesList: function() { return Messages.find({},{sort :{time: 1}}); }
+      messagesList: function() { return Messages.find({},{sort :{cont: 1}}); }
   });
 
   Template.messagesList.messages = function(){
-    return Messages.find({},{sort : {time: 1}});
+    return Messages.find({},{sort : {cont: 1}});
   };
 
   Template.messagesList.backButton=function(){
@@ -19,6 +19,7 @@ if (Meteor.isClient) {
       if(event.which == 13){ //13 == Enter key event
         var newName= localStorage.name;
         var newText= document.getElementById('newtext');
+        var contador = Messages.find({},{sort : {cont: 1}}).count();
         Meteor.call("getServerTime", function (error, result) {
               Session.set("time", result);
         });
@@ -27,6 +28,7 @@ if (Meteor.isClient) {
             author: newName,
             text: newText.value,
             time: Session.get("time"),
+            cont: contador,
           });
           document.getElementsByTagName('newtext').value = '';
           newText.value = '';
@@ -36,6 +38,7 @@ if (Meteor.isClient) {
     'click button#newmessage': function () {
         var newName= localStorage.name;
         var newText= document.getElementById('newtext');
+        var contador = Messages.find({},{sort : {cont: 1}}).count();
         Meteor.call("getServerTime", function (error, result) {
               Session.set("time", result);
         });
@@ -44,6 +47,7 @@ if (Meteor.isClient) {
             author: newName,
             text: newText.value,
             time: Session.get("time"),
+            cont: contador,
           }); 
           document.getElementsByTagName('newtext').value = '';
           newText.value = '';
