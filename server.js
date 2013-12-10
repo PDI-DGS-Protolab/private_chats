@@ -5,21 +5,25 @@ if (Meteor.isClient) {
   });
 
   Template.messagesList.messages = function(){
-    return Messages.find({},{sort : {cont: 1}});
+    var usuaris = Users.findOne({_id:localStorage.id});
+    console.log("olaaa");
+    console.log(usuaris);
+    return Messages.find({$where: "cont >= "+usuaris.cont},{sort : {cont: 1}});
   };
 
   Template.messagesList.user = function(){
       var username=document.cookie;
       var getCookieResult=username.split("nameForChatApp=");
       var clearedName = getCookieResult[1].split(";");
-     var contador = Messages.find({},{sort : {cont: 1}}).count();
-      console.log(Users.find({"name":clearedName[0]},{sort : {cont: 1}}).count());
-      if (Users.find({"name":clearedName[0]},{sort : {cont: 1}}).count()==0){
-          Users.insert({
-            name: clearedName[0],
-            cont: contador,
-          });
-      }
+      Meteor.call("getCountMessages", function (error, result) {
+              if (localStorage.id == undefined){
+                  var id = Users.insert({
+                    name: clearedName[0],
+                    cont:  result,
+                  });
+                  localStorage.id = id;
+              }
+      });
       var name = clearedName[0];
       localStorage.name = name;
       return name;
@@ -77,9 +81,19 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 
+  // server-side publish
+Meteor.publish('UserCont', function (user_id) {
+  if (someServerMethodThatValidatesUserId(user_id))
+    // publish a single user object to the client
+    return Users.find({_id: user_id});
+});
+
   Meteor.methods({
         getServerTime: function () {
             return (new Date).toTimeString();
+        },
+        getCountMessages: function () {
+            return Messages.find({},{sort : {cont: 1}}).count();
         }
     });
 }
