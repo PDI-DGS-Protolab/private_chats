@@ -12,6 +12,14 @@ if (Meteor.isClient) {
       var username=document.cookie;
       var getCookieResult=username.split("nameForChatApp=");
       var clearedName = getCookieResult[1].split(";");
+     var contador = Messages.find({},{sort : {cont: 1}}).count();
+      console.log(Users.find({"name":clearedName[0]},{sort : {cont: 1}}).count());
+      if (Users.find({"name":clearedName[0]},{sort : {cont: 1}}).count()==0){
+          Users.insert({
+            name: clearedName[0],
+            cont: contador,
+          });
+      }
       var name = clearedName[0];
       localStorage.name = name;
       return name;
