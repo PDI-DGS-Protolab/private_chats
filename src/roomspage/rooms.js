@@ -28,9 +28,11 @@ if (Meteor.isClient) {
         var urlDomain = url.split(".");
         var resUrl;
         if(urlDomain[2]==undefined){//not going to a subdomain
-          console.log("domain");
-          var noPath=urlDomain[1].split("/");
-          resUrl=urlDomain[0]+"."+noPath[0];
+          if (urlDomain[1] != undefined) {
+            var noPath=urlDomain[1].split("/");
+            resUrl=urlDomain[0]+"."+noPath[0];
+          }
+          else resUrl=urlDomain[0];
 
         }
         else{//going to a subdomain; ex:*.domain.com
@@ -39,7 +41,8 @@ if (Meteor.isClient) {
           resUrl="."+urlDomain[1]+"."+noPath[0];
         }
         
-        document.cookie = "nameForChatApp=" + localStorage.name + ";domain="+resUrl+";path=/";             
+        document.cookie = "nameForChatApp=" + localStorage.name + ";domain="+resUrl+";path=/";
+        //console.log(document.cookie);             
         window.location.href = "http://"+url;
       },
       'click a.nameRoom': function (e) {
@@ -48,17 +51,20 @@ if (Meteor.isClient) {
         var resUrl;
         if(urlDomain[2]==undefined){//not going to a subdomain
           console.log("domain");
-          var noPath=urlDomain[1].split("/");
-          resUrl=urlDomain[0]+"."+noPath[0];
-
+          if (urlDomain[1] != undefined) {
+            var noPath=urlDomain[1].split("/");
+            resUrl=urlDomain[0]+"."+noPath[0];
+          }
+          else resUrl=urlDomain[0];
         }
         else{//going to a subdomain; ex:*.domain.com
           console.log("subdomain");
           var noPath=urlDomain[2].split("/");
           resUrl="."+urlDomain[1]+"."+noPath[0];
         }
-        
-        document.cookie = "nameForChatApp=" + localStorage.name + ";domain="+resUrl+";path=/";             
+          
+        document.cookie = "nameForChatApp=" + localStorage.name + ";domain="+resUrl+";path=/";
+        //console.log(document.cookie);             
         window.location.href = "http://"+url;
       },
       'click button.delRoom':function(e){
