@@ -5,10 +5,12 @@ if (Meteor.isClient) {
   });
 
   Template.messagesList.messages = function(){
-    var usuaris = Users.findOne({_id:localStorage.id});
-    console.log("olaaa");
-    console.log(usuaris);
-    return Messages.find({$where: "cont >= "+usuaris.cont},{sort : {cont: 1}});
+  if (localStorage.id != undefined) {
+      Meteor.call("getUser",localStorage.id, function (error, result) {
+            Session.set("contadorUser", result.cont);
+      }); 
+    }
+    return Messages.find({$where: "this.cont >="+Session.get("contadorUser")},{sort : {cont: 1}});
   };
 
   Template.messagesList.user = function(){
@@ -18,19 +20,18 @@ if (Meteor.isClient) {
       Meteor.call("getCountMessages", function (error, result) {
               if (localStorage.id == undefined){
                   var id = Users.insert({
-                    name: clearedName[0],
-                    cont:  result,
+                    'name': clearedName[0],
+                    'cont':  result,
                   });
+                  Session.set("contadorUser", result);
+                  localStorage.cont = result;
                   localStorage.id = id;
               }
       });
+      
       var name = clearedName[0];
       localStorage.name = name;
       return name;
-  };
-
-  Template.messagesList.backButton=function(){
-      return localStorage.serverBack;
   };
 
   Template.messagesList.events({
@@ -94,6 +95,9 @@ Meteor.publish('UserCont', function (user_id) {
         },
         getCountMessages: function () {
             return Messages.find({},{sort : {cont: 1}}).count();
+        },
+        getUser : function(id){
+          return Users.findOne({_id:id});
         }
     });
 }
