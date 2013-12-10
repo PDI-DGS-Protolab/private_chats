@@ -1,8 +1,5 @@
 if (Meteor.isClient) {
 
-  
-  
-
   Template.messagesList.helpers({
       messagesList: function() { return Messages.find({},{sort :{cont: 1}}); }
   });
@@ -16,6 +13,7 @@ if (Meteor.isClient) {
       var getCookieResult=username.split("nameForChatApp=");
       var clearedName = getCookieResult[1].split(";");
       var name = clearedName[0];
+      localStorage.name = name;
       return name;
   };
 
@@ -32,9 +30,9 @@ if (Meteor.isClient) {
         Meteor.call("getServerTime", function (error, result) {
               Session.set("time", result);
         });
-        if(newName.value != '' && newText.value != ''){
+        if(newName != '' && newText.value != ''){
           Messages.insert({
-            author: 'Jose',
+            author: newName,
             text: newText.value,
             time: Session.get("time"),
             cont: contador,
@@ -51,7 +49,7 @@ if (Meteor.isClient) {
         Meteor.call("getServerTime", function (error, result) {
               Session.set("time", result);
         });
-        if(newName.value != '' && newText.value != ''){
+        if(newName != '' && newText.value != ''){
           Messages.insert({
             author: newName,
             text: newText.value,
