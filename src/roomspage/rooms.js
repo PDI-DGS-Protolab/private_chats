@@ -19,6 +19,10 @@ if (Meteor.isClient) {
         Router.go('joinroom');
       },
 
+      'click button.createButton': function () {      
+        Router.go('createroom');
+      },
+
       'click a.backButton': function () {
         localStorage.removeItem('name');
         Router.go('homepage');

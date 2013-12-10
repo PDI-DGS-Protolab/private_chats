@@ -1,0 +1,15 @@
+<template name="createroom">
+  <div class="topBar">
+      <div class="divButtonBack">
+          <a class="backButton" href="{{pathFor 'rooms'}}"><span>Back</span></a>    
+      </div>
+      <div class="titleBox">Create a room</div>
+  </div>
+  <div class="centerBox" style="padding-top:15%;">
+      <center> 
+        <input class="inputLogin" id="newName" style="margin-bottom:10px;" placeholder="Name" type="text" />
+        <input class="inputLogin"  id="newUrl" placeholder="Url" type="text"/>
+        <button type="submit" id="createRoom" class="centerButton">Create</button>
+      </center>
+  </div>
+</template>

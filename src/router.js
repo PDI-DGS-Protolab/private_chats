@@ -13,4 +13,8 @@ Router.map( function () {
     path: 'join-room'
   });
 
+  this.route('createroom', {
+    path: 'create-room'
+  });
+
 });
