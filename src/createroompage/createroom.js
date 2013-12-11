@@ -15,14 +15,14 @@ if (Meteor.isClient) {
         
         if(error) {
           console.log('http get FAILED!');
+          console.log(error);
         } else {
           key = result.content;
-          console.log(key);
           var roomUrl = newUrl.value + "/room/" + key;
-          console.log(roomUrl);
           if(key != ''){
             if (localStorage.servers == null) {
               var servers =  new Array();
+              console.alert("This room exists on the server");
             }
             else {
               servers = JSON.parse(localStorage.servers);
