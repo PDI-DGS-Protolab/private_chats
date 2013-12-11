@@ -11,8 +11,8 @@ if (Meteor.isClient) {
       }); 
     }
     var actRoom = localStorage.keyRoom;
-    return Messages.find({$where: "this.cont >="+Session.get("contadorUser"),
-                          room: actRoom},{sort : {cont: 1}});
+    var num = Session.get("contadorUser");
+    return Messages.find({cont: {$gt: num}, room: actRoom},{sort : {cont: 1}});
   };
 
   Template.messagesList.roomName =  function () {
@@ -20,7 +20,7 @@ if (Meteor.isClient) {
   };
 
   Template.messagesList.user = function(){
-      var username=document.cookie;
+      /*var username=document.cookie;
       var getCookieResult=username.split("nameForChatApp=");
       var clearedName = getCookieResult[1].split(";");
       Meteor.call("getCountMessages", function (error, result) {
@@ -36,8 +36,8 @@ if (Meteor.isClient) {
       });
       
       var name = clearedName[0];
-      localStorage.name = name;
-      return name;
+      localStorage.name = name;*/
+      return 'mockName';
   };
 
   Template.messagesList.events({
