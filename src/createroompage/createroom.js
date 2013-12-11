@@ -12,33 +12,29 @@ if (Meteor.isClient) {
 
 
       Meteor.call('remoteGet',fullURL,{}, function (error, result) {
-      if(error) {
-        console.log('http get FAILED!');
-      } else {
-        console.log('http get SUCCES');
-      if (result.statusCode === 200) {
-        console.log('Status code = 200!');
-        console.log(result.content);
-
-      }
-}
-});
-
-      if(newUrl.value != ''){
-        if (localStorage.servers == null) {
-            var servers =  new Array();
+        
+        if(error) {
+          console.log('http get FAILED!');
+        } else {
+          key = result.content;
+          console.log(key);
+          var roomUrl = newUrl.value + "/room/" + key;
+          console.log(roomUrl);
+          if(key != ''){
+            if (localStorage.servers == null) {
+              var servers =  new Array();
+            }
+            else {
+              servers = JSON.parse(localStorage.servers);
+            }
+            arrayObj = {"serverName":newName.value,"server":roomUrl};
+            servers.push(arrayObj);
+            localStorage.servers = JSON.stringify(servers);     
+            Router.go('rooms');
+          }  
         }
-        else {
-            servers = JSON.parse(localStorage.servers);
-        }
-        arrayObj = {"serverName":newName.value,"server":key.value};
-        servers.push(arrayObj);
-        localStorage.servers = JSON.stringify(servers);     
-        //Router.go('rooms');
-      }  
+      });
     }
   });
-
-  
 
 }
