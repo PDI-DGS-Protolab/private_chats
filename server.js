@@ -5,12 +5,18 @@ if (Meteor.isClient) {
   });
 
   Template.messagesList.messages = function(){
-  if (localStorage.id != undefined) {
+    if (localStorage.id != undefined) {
       Meteor.call("getUser",localStorage.id, function (error, result) {
             Session.set("contadorUser", result.cont);
       }); 
     }
-    return Messages.find({$where: "this.cont >="+Session.get("contadorUser")},{sort : {cont: 1}});
+    var actRoom = localStorage.keyRoom;
+    return Messages.find({$where: "this.cont >="+Session.get("contadorUser"),
+                          room: actRoom},{sort : {cont: 1}});
+  };
+
+  Template.messagesList.roomName =  function () {
+    return (KeysRooms.find({list: localStorage.keyRoom})).name;
   };
 
   Template.messagesList.user = function(){
@@ -38,8 +44,9 @@ if (Meteor.isClient) {
       'keydown input#newtext' : function(event){
       if(event.which == 13){ //13 == Enter key event
         var newName= localStorage.name;
+        var actRoom = localStorage.keyRoom;
         var newText= document.getElementById('newtext');
-        var contador = Messages.find({},{sort : {cont: 1}}).count();
+        var contador = Messages.find({room: actRoom},{sort : {cont: 1}}).count();
         Meteor.call("getServerTime", function (error, result) {
               Session.set("time", result);
         });
@@ -49,6 +56,7 @@ if (Meteor.isClient) {
             text: newText.value,
             time: Session.get("time"),
             cont: contador,
+            room: actRoom,
           });
           document.getElementsByTagName('newtext').value = '';
           newText.value = '';
@@ -57,8 +65,9 @@ if (Meteor.isClient) {
     },
     'click button#newmessage': function () {
         var newName= localStorage.name;
+        var actRoom = localStorage.keyRoom;
         var newText= document.getElementById('newtext');
-        var contador = Messages.find({},{sort : {cont: 1}}).count();
+        var contador = Messages.find({room: actRoom},{sort : {cont: 1}}).count();
         Meteor.call("getServerTime", function (error, result) {
               Session.set("time", result);
         });
@@ -68,6 +77,7 @@ if (Meteor.isClient) {
             text: newText.value,
             time: Session.get("time"),
             cont: contador,
+            room: actRoom,
           }); 
           document.getElementsByTagName('newtext').value = '';
           newText.value = '';
