@@ -14,7 +14,7 @@ if (Meteor.isClient) {
       Meteor.call('remoteGet',fullURL,{}, function (error, result) {
         
         if(error) {
-          console.log('http get FAILED!');
+          window.alert("Can not conect to the server");
           console.log(error);
         } else {
           key = result.content;
@@ -22,7 +22,6 @@ if (Meteor.isClient) {
           if(key != ''){
             if (localStorage.servers == null) {
               var servers =  new Array();
-              console.alert("This room exists on the server");
             }
             else {
               servers = JSON.parse(localStorage.servers);
@@ -31,7 +30,10 @@ if (Meteor.isClient) {
             servers.push(arrayObj);
             localStorage.servers = JSON.stringify(servers);     
             Router.go('rooms');
-          }  
+          }
+          else {            
+              window.alert("This room already exists on server\nUse other name or join it");
+          }
         }
       });
     }
