@@ -21,7 +21,8 @@ if (Meteor.isClient) {
     return n[0].name;
   };
 
-  Template.messagesList.user = function(){
+  // Sets into the localstorege the name contained into the cookie
+  getCookie =  function(e) {
     var username = document.cookie;
     var getCookieResult = username.split("nameForChatApp=");
     var clearedName = getCookieResult[1].split(";");
@@ -39,6 +40,11 @@ if (Meteor.isClient) {
     var name = clearedName[0];
     localStorage.name = name;
     return name;
+  };
+
+  Template.messagesList.user = function(e){
+    //getCookie(e);
+    return localStorage.name;
   };
 
   resolveClick = function () {
