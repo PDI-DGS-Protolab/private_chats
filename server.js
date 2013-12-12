@@ -16,72 +16,60 @@ if (Meteor.isClient) {
   };
 
   Template.messagesList.roomName =  function () {
-    return (KeysRooms.find({list: localStorage.keyRoom})).name;
+    var n = (KeysRooms.find({_id: localStorage.keyRoom})).fetch();
+    if (n[0].name == '') return 'Name not found';
+    return n[0].name;
   };
 
   Template.messagesList.user = function(){
-      /*var username=document.cookie;
-      var getCookieResult=username.split("nameForChatApp=");
-      var clearedName = getCookieResult[1].split(";");
-      Meteor.call("getCountMessages", function (error, result) {
-              if (localStorage.id == undefined){
-                  var id = Users.insert({
-                    'name': clearedName[0],
-                    'cont':  result,
-                  });
-                  Session.set("contadorUser", result);
-                  localStorage.cont = result;
-                  localStorage.id = id;
-              }
-      });
+    var username = document.cookie;
+    var getCookieResult = username.split("nameForChatApp=");
+    var clearedName = getCookieResult[1].split(";");
+    Meteor.call("getCountMessages", function (error, result) {
+      if (localStorage.id == undefined){
+        var id = Users.insert({
+          'name': clearedName[0],
+          'cont':  result,
+        });
+        Session.set("contadorUser", result);
+        localStorage.id = id;
+      }
+    });
       
-      var name = clearedName[0];
-      localStorage.name = name;*/
-      return 'mockName';
+    var name = clearedName[0];
+    localStorage.name = name;
+    return name;
+  };
+
+  resolveClick = function () {
+    var newName= localStorage.name;
+    var actRoom = localStorage.keyRoom;
+    var newText= document.getElementById('newtext');
+    var contador = Messages.find({room: actRoom},{sort : {cont: 1}}).count();
+    Meteor.call("getServerTime", function (error, result) {
+          Session.set("time", result);
+    });
+    if(newName != '' && newText.value != ''){
+      Messages.insert({
+        author: newName,
+        text: newText.value,
+        time: Session.get("time"),
+        cont: contador,
+        room: actRoom,
+      });
+      document.getElementsByTagName('newtext').value = '';
+      newText.value = '';
+    }
   };
 
   Template.messagesList.events({
       'keydown input#newtext' : function(event){
       if(event.which == 13){ //13 == Enter key event
-        var newName= localStorage.name;
-        var actRoom = localStorage.keyRoom;
-        var newText= document.getElementById('newtext');
-        var contador = Messages.find({room: actRoom},{sort : {cont: 1}}).count();
-        Meteor.call("getServerTime", function (error, result) {
-              Session.set("time", result);
-        });
-        if(newName != '' && newText.value != ''){
-          Messages.insert({
-            author: newName,
-            text: newText.value,
-            time: Session.get("time"),
-            cont: contador,
-            room: actRoom,
-          });
-          document.getElementsByTagName('newtext').value = '';
-          newText.value = '';
-        }
+        resolveClick();
       }
     },
     'click button#newmessage': function () {
-        var newName= localStorage.name;
-        var actRoom = localStorage.keyRoom;
-        var newText= document.getElementById('newtext');
-        var contador = Messages.find({room: actRoom},{sort : {cont: 1}}).count();
-        Meteor.call("getServerTime", function (error, result) {
-              Session.set("time", result);
-        });
-        if(newName != '' && newText.value != ''){
-          Messages.insert({
-            author: newName,
-            text: newText.value,
-            time: Session.get("time"),
-            cont: contador,
-            room: actRoom,
-          }); 
-          document.getElementsByTagName('newtext').value = '';
-          newText.value = '';
-      }
+      resolveClick();
     }
   });
 
@@ -100,14 +88,14 @@ Meteor.publish('UserCont', function (user_id) {
 });
 
   Meteor.methods({
-        getServerTime: function () {
-            return (new Date).toTimeString();
-        },
-        getCountMessages: function () {
-            return Messages.find({},{sort : {cont: 1}}).count();
-        },
-        getUser : function(id){
-          return Users.findOne({_id:id});
-        }
-    });
+    getServerTime: function () {
+        return (new Date).toTimeString();
+    },
+    getCountMessages: function () {
+        return Messages.find({},{sort : {cont: 1}}).count();
+    },
+    getUser : function(id){
+      return Users.findOne({_id:id});
+    }
+  });
 }

@@ -8,6 +8,10 @@ Router.map( function () {
         localStorage.name = params.userName;
       }
       localStorage.keyRoom = this.params._room;
+      if (KeysRooms.find({_id: this.params._room}).count() == 0) {
+        this.render('roomNotFound');
+        this.stop();
+      }
     }
   });
 

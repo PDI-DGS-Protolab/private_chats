@@ -1,0 +1,32 @@
+<template name="messagesList">
+   
+  <div class="topBar">
+    <div class="divButtonBack">
+        <a class="backButton" href="#" onclick="goBack();return false;"><span>Back</span></a>
+    </div>
+    <div class="titleBox">{{roomName}} - {{user}}</div>
+  </div>
+
+  <div class="divRoomTable"> 
+    <table id="newspaper-a" summary="Available Rooms">
+      <tbody>
+        {{#each messages}}
+          <tr>
+            <td>{{author}}</td>
+            <td>{{text}}</td>
+          </tr>
+        {{else}}
+          <tr>
+            <td>No Messages yet</td>
+            <td></td>    
+          </tr>
+        {{/each}} 
+      </tbody>
+    </table>
+  </div>
+  <div class="bottomBar">
+    <input type="text" class="textMessage" id="newtext" name="text" placeholder="Enter your message"></input>
+    <button type="submit" id="newmessage" class="sendButton">Send
+    </button>
+  </div>
+</template>
