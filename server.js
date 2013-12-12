@@ -26,7 +26,14 @@ if (Meteor.isClient) {
     var username = document.cookie;
     var getCookieResult = username.split("nameForChatApp=");
     var clearedName = getCookieResult[1].split(";");
-    Meteor.call("getCountMessages", function (error, result) {
+    setSessionAndId();      
+    var name = clearedName[0];
+    localStorage.name = name;
+    return name;
+  };
+
+  setSessionAndId = function(){
+      Meteor.call("getCountMessages", function (error, result) {
       if (localStorage.id == undefined){
         var id = Users.insert({
           'name': clearedName[0],
@@ -36,14 +43,11 @@ if (Meteor.isClient) {
         localStorage.id = id;
       }
     });
-      
-    var name = clearedName[0];
-    localStorage.name = name;
-    return name;
   };
 
   Template.messagesList.user = function(e){
     //getCookie(e);
+    setSessionAndId();
     return localStorage.name;
   };
 
