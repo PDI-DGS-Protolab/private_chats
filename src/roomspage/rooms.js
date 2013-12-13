@@ -46,7 +46,7 @@ if (Meteor.isClient) {
 
       'click a.backButton': function () {
         localStorage.removeItem('name');
-        Router.go('homepage');
+        Router.go('/');
       },
       'click a.urlRoom': function (e) {
         resolveUrl(e);

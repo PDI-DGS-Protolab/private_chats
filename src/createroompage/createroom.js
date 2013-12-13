@@ -1,6 +1,5 @@
 
 if (Meteor.isClient) {
-  console.log("here comes the cliente");
   
 
   Template.createroom.events({
@@ -8,15 +7,13 @@ if (Meteor.isClient) {
       console.log("click button.centerButton");
 
       
-      var newUrl= document.getElementById('newUrl');
-      var newName= document.getElementById('newName');
+      var newUrl = document.getElementById('newUrl');
+      var newName = document.getElementById('newName');
       // window.location.href = "/newRoom?"+newUrl;
-      var key="";
+      var key = "";
       var fullURL="http://"+newUrl.value+"/newRoom?newName="+newName.value;
 
-
       Meteor.call('remoteGet',fullURL,{}, function (error, result) {
-        
         if(error) {
           window.alert("Can not conect to the server");
           console.log(error);
@@ -24,16 +21,9 @@ if (Meteor.isClient) {
           key = result.content;
           var roomUrl = newUrl.value + "/room/" + key;
           if(key != ''){
-            if (localStorage.servers == null) {
-              var servers =  new Array();
-            }
-            else {
-              servers = JSON.parse(localStorage.servers);
-            }
-            arrayObj = {"serverName":newName.value,"server":roomUrl};
-            servers.push(arrayObj);
-            localStorage.servers = JSON.stringify(servers);     
-            Router.go('rooms');
+            //modificar localStore por el token user;
+            AddRoom(key,newName,roomUrl,localStorage.name);
+            Router.go('guest');
           }
           else {            
               window.alert("This room already exists on server\nUse other name or join it");
@@ -43,4 +33,14 @@ if (Meteor.isClient) {
     }
   });
 
+ function AddRoom(key,newName,roomUrl,user_id) {
+      //console.log(key);
+      //console.log(newName.value);
+      //console.log(roomUrl);
+      //console.log(user_id);
+      Meteor.call("addNewRoom",key,newName.value,roomUrl,user_id, function (error, result) {
+            console.log(result);
+            Session.set("roomInvite", result);
+      });
+  };
 }
