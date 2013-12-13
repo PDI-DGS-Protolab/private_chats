@@ -16,6 +16,10 @@ Router.map( function () {
     path: 'rooms'
   });
 
+  this.route('guest', {
+    path: 'guest'
+  });
+
   this.route('joinroom', {
     path: 'join-room'
   });
@@ -23,5 +27,4 @@ Router.map( function () {
   this.route('createroom', {
     path: 'create-room'
   });
-
 });
