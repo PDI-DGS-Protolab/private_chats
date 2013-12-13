@@ -8,11 +8,22 @@ if (Meteor.isClient) {
 
   Template.login.events({
     'click button.centerButton': function () {
-      var newName= document.getElementById('username');
-      if(newName.value != ''){
-        localStorage.name = newName.value; 
-        Router.go('rooms');
-      }
+      var _username = document.getElementById('username').value;
+      var _password = document.getElementById('userpass').value;
+      Meteor.loginWithPassword(_username, _password, function(err){
+        if (err) {
+          // The user might not have been found, or their passwword
+          // could be incorrect. Inform the user that their
+          // login attempt has failed.
+          document.getElementById('username').value = null;
+          document.getElementById('username').placeholder = 'Wrong username/email';
+          document.getElementById('userpass').value = null;
+          document.getElementById('userpass').placeholder = 'Or wrong passwword';
+        }
+        else {
+          Router.go('rooms');
+        }          
+      });
     },
     'click div.signupButton': function () {
       // Code for this click

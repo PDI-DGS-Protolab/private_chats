@@ -1,14 +1,10 @@
 
 if (Meteor.isClient) {
-  
 
   Template.createroom.events({
-   'click button.centerButton': function () {
-      console.log("click button.centerButton");
-
-      
-      var newUrl = document.getElementById('newUrl');
-      var newName = document.getElementById('newName');
+   'click button.centerButton': function () {      
+      var newUrl= document.getElementById('newUrl');
+      var newName= document.getElementById('newName');
       // window.location.href = "/newRoom?"+newUrl;
       var key = "";
       var fullURL="http://"+newUrl.value+"/newRoom?newName="+newName.value;
