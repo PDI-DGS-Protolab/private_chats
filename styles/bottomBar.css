@@ -1,10 +1,22 @@
-.forgotButton, .signupButton {
+.simpleBottomButton {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 10px;
     font-weight: bold;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    width: 50%;
+    height: 100%;
+    text-align: center;
     cursor: pointer;
+}
+
+.forgotButton, .signupButton {
+    min-height: 20px;
+    padding-top: 8px;
+    width: 49%;
     float: left;
+    text-decoration: none;
+}
+
+.signupButton {
+    border-right: solid;
+    border-right-width: 1px;
+    border-right-color: black;
 }

@@ -3,34 +3,17 @@ if (Meteor.isClient) {
   
 
 
-  Template.rooms.user=function(){
-      return localStorage.name;
+  Template.rooms.user = function(){
+    return Meteor.user().profile.fullname;
   };
 
   Template.rooms.rooms=function(){
-      if (localStorage.servers == null) return  new Array();
-      else return JSON.parse(localStorage.servers);
+    if (localStorage.servers == null) return  new Array();
+    else return JSON.parse(localStorage.servers);
   };
 
   resolveUrl = function (e) {
     var url = e.currentTarget.id + '?userName=' + localStorage.name;
-    /*var urlDomain = url.split(".");
-    var resUrl;
-    if(urlDomain[2]==undefined){//not going to a subdomain
-      if (urlDomain[1] != undefined) {
-        var noPath=urlDomain[1].split("/");
-        resUrl=urlDomain[0]+"."+noPath[0];
-      }
-      else resUrl=urlDomain[0];
-
-    }
-    else{//going to a subdomain; ex:*.domain.com
-      var noPath=urlDomain[2].split("/");
-      resUrl="."+urlDomain[1]+"."+noPath[0];
-    }
-    
-    document.cookie = "nameForChatApp=" + localStorage.name + ";domain="+resUrl+";path=/";
-     */      
     window.location.href = "http://"+url;
   }
 
@@ -46,7 +29,8 @@ if (Meteor.isClient) {
 
       'click a.backButton': function () {
         localStorage.removeItem('name');
-        Router.go('homepage');
+        Meteor.logout();
+        Router.go('login');
       },
       'click a.urlRoom': function (e) {
         resolveUrl(e);
