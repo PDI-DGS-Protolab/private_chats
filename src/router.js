@@ -1,8 +1,12 @@
 Router.map( function () {
 
   // Routing to the homepage
-  this.route('homepage', {
+  this.route('login', {
     path: '/'
+  });
+
+  this.route('signup', {
+    path: 'signup'
   });
 
   this.route('rooms', {

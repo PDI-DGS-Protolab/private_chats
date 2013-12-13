@@ -1,0 +1,16 @@
+<template name="login">
+  <div class="topBar">
+    <div class="titleBox">Welcome to Private Chats! - Please log in</div>
+  </div>
+  <div class="centerBox" style="padding-top:15%;">
+    <center> 
+      <input class="inputLogin" id="username" placeholder="Username or email" type="text"/>
+      <input class="inputLogin" id="userpass" placeholder="Password" type="password"/>
+      <button type="submit" class="centerButton">Connect</button>
+    </center>
+  </div>
+  <div class="bottomBar">
+      <a class="signupButton" href="{{pathFor 'signup'}}">Sign up</a>
+      <a class="forgotButton">Forgot your password?</a>
+  </div>
+</template>

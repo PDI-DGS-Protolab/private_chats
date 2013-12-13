@@ -1,7 +1,7 @@
 .topBar {
     background: #005195;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 15px;
     padding: 10px;
     min-height: 32px;
     color:black;
@@ -243,6 +243,7 @@ a.delRoom:hover, a.delRoom:focus {
 }
 
 .inputLogin{
+    margin:5px 5px 5px 5px;
     width:90%;
     padding: 10px;
     height: 30px;
