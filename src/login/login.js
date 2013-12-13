@@ -1,7 +1,7 @@
 if (Meteor.isClient) {
 
   Template.login.rendered = function () {
-    if (localStorage.name != null) {     
+    if (Meteor.user() != null) {     
       Router.go('rooms');
     }
   };
