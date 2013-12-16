@@ -17,6 +17,10 @@ if (Meteor.isClient) {
     window.location.href = "http://"+url;
   }
 
+  var getSegment = function (url, index) {
+    return url.replace(/^https?:\/\//, '').split('/')[index];
+  }
+
   
   Template.rooms.events({
      'click button.joinButton': function () {      
@@ -33,7 +37,18 @@ if (Meteor.isClient) {
         Router.go('login');
       },
       'click a.urlRoom': function (e) {
-        resolveUrl(e);
+        //resolveUrl(e);
+        //TODO : properly assign user token authRoom parameters
+       // Router.go('rightsCheck');
+
+        var lastSegment =  getSegment(e.currentTarget.id,2);
+        var firstSegment =  getSegment(e.currentTarget.id,1);
+        var user = 'Ola';//change to tokens
+        var roomAuth ='roomAuth';//change to tokens
+        //check if is working with IE
+        var url = e.currentTarget.id + '?user=' + user +'?roomAuth='+roomAuth;
+        window.location.href = "http://"+url;
+
       },
       'click a.nameRoom': function (e) {
         resolveUrl(e);

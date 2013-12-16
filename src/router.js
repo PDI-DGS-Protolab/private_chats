@@ -21,4 +21,24 @@ Router.map( function () {
     path: 'create-room'
   });
 
+  this.route('check', {
+    path: '/check',
+    autorender: false,
+    action: function () {
+      var params = this.params;
+      var keyUser = this.params.user;
+      var keyRoom = this.params.roomAuth;
+      var userName ='';
+      //if has rights to enter -> respond with userName
+      if(Rights.find({user: keyUser, roomAuth: keyRoom}).count() != 0){
+        this.response.setHeader('Content-Type', 'application/json');
+        this.response.end(userName);
+      }
+      else{//if not -> respond with empty string
+        this.response.setHeader('Content-Type', 'application/json');
+        this.response.end('');
+      }
+    }
+  })
+
 });
