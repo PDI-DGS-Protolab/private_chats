@@ -1,8 +1,6 @@
 
 if (Meteor.isClient) {
   
-
-
   Template.rooms.user = function(){
     return Meteor.user().profile.fullname;
   };

@@ -9,8 +9,15 @@ Router.map( function () {
     path: 'signup'
   });
 
+  this.route('forgotpassword',{
+  });
+
   this.route('rooms', {
     path: 'rooms'
+  });
+
+  this.route('guest', {
+    path: 'guest'
   });
 
   this.route('joinroom', {
