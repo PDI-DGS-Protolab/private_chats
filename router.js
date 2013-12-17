@@ -2,17 +2,49 @@ Router.map( function () {
 
   this.route('messagesList', {
     path: '/room/:_room',
-    data: function () {
+    action: function(){
+
       var params = this.params;
-      if (params.userName != '' && params.userName != null) {
-        localStorage.name = params.userName;
-      }
-      localStorage.keyRoom = this.params._room;
-      if (KeysRooms.find({_id: params._room}).count() == 0) {
-        this.render('roomNotFound');
-        this.stop();
-      }
-    }
+      var keyUser = this.params.user;
+      var keyRoom = this.params.roomAuth;
+      //TODO : uncomment 12-34 when authserver part is ready
+      //TODO : check fullURL 
+
+    //   var fullURL='http://localhost:3000'+'/check?user='+keyUser+'?roomAuth'+keyRoom;
+
+    //   Meteor.call('remoteGet',fullURL,{}, function (error, result) {
+        
+    //     if(error) {
+    //       window.alert("Can not conect to the server");
+    //       console.log(error);
+    //     } else {
+    //       key = result.content;
+    //       if(key != ''){
+    //         localStorage.name = key.value;
+    //         localStorage.keyRoom = this.params._room;
+    //          if (KeysRooms.find({_id: params._room}).count() == 0) {
+    //           this.render('roomNotFound');
+    //           this.stop();
+    //         }
+    //       }
+    //       else {
+    //         //show ACCESS DENIED page
+    //       }
+    //       }
+    //   });
+    // },
+
+   data: function () {
+     var params = this.params;
+     if (params.userName != '' && params.userName != null) {
+       localStorage.name = params.userName;
+     }
+     localStorage.keyRoom = this.params._room;
+     if (KeysRooms.find({_id: params._room}).count() == 0) {
+       this.render('roomNotFound');
+       this.stop();
+     }
+   }
   });
 
   this.route('name', {
@@ -31,4 +63,5 @@ Router.map( function () {
       this.response.end(_key);
     }
   });
+
 });
