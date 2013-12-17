@@ -2,12 +2,16 @@
 if (Meteor.isClient) {
   
   Template.rooms.user = function(){
-    return Meteor.user().profile.fullname;
+    return "Pepe" //Meteor.user().profile.fullname;
   };
 
-  Template.rooms.rooms=function(){
-    if (localStorage.servers == null) return  new Array();
-    else return JSON.parse(localStorage.servers);
+  Template.rooms.rooms = function(){
+     Meteor.call("roomsUser",Meteor.user()._id, function (error, result) {
+          console.log(result);
+          console.log(JSON.stringify(result));
+          Session.set("salas", result);
+      });
+     return Session.get("salas");
   };
 
   resolveUrl = function (e) {
