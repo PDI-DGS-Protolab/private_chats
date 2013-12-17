@@ -53,13 +53,14 @@ Router.map( function () {
   });
 
   this.route('check', {
-    path: '/check',
+    path: 'check',
     autorender: false,
     action: function () {
       var params = this.params;
       var keyUser = this.params.user;
       var keyRoom = this.params.roomAuth;
       var userName ='';
+      //TODO : rights check
       //if has rights to enter -> respond with userName
       // if(Rights.find({user: keyUser, roomAuth: keyRoom}).count() != 0){
       //   this.response.setHeader('Content-Type', 'application/json');
