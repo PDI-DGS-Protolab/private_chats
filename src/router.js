@@ -37,14 +37,14 @@ Router.map( function () {
       var keyRoom = this.params.roomAuth;
       var userName ='';
       //if has rights to enter -> respond with userName
-      if(Rights.find({user: keyUser, roomAuth: keyRoom}).count() != 0){
+      // if(Rights.find({user: keyUser, roomAuth: keyRoom}).count() != 0){
+      //   this.response.setHeader('Content-Type', 'application/json');
+      //   this.response.end(userName);
+      // }
+      // else{//if not -> respond with empty string
         this.response.setHeader('Content-Type', 'application/json');
-        this.response.end(userName);
-      }
-      else{//if not -> respond with empty string
-        this.response.setHeader('Content-Type', 'application/json');
-        this.response.end('');
-      }
+        this.response.end('Ola');
+      //}
     }
   })
 

@@ -6,8 +6,14 @@ if (Meteor.isClient) {
   };
 
   Template.rooms.rooms=function(){
-    if (localStorage.servers == null) return  new Array();
-    else return JSON.parse(localStorage.servers);
+    Meteor.call("getRooms",Meteor.userId(), function (error, result) {
+            console.log(result);
+          
+            return result;
+      });
+    // if (localStorage.servers == null) return  new Array();
+
+    // else return JSON.parse(localStorage.servers);
   };
 
   resolveUrl = function (e) {
