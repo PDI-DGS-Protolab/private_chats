@@ -13,18 +13,42 @@ Router.map( function () {
   });
 
   this.route('rooms', {
-    path: 'rooms'
+    path: 'rooms',
+    before: function () {
+      if (!Meteor.user()) {
+        this.render('login');
+        this.stop();
+      }
+    }
   });
 
   this.route('guest', {
-    path: 'guest'
+    path: 'guest',
+    before: function () {
+      if (!Meteor.user()) {
+        this.render('login');
+        this.stop();
+      }
+    }
   });
 
   this.route('joinroom', {
-    path: 'join-room'
+    path: 'join-room',
+    before: function () {
+      if (!Meteor.user()) {
+        this.render('login');
+        this.stop();
+      }
+    }
   });
 
   this.route('createroom', {
-    path: 'create-room'
+    path: 'create-room',
+    before: function () {
+      if (!Meteor.user()) {
+        this.render('login');
+        this.stop();
+      }
+    }
   });
 });
