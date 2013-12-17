@@ -7,6 +7,8 @@ if (Meteor.isClient) {
         var newName= document.getElementById('invited');
         var names = newName.value.replace(/ /g,"");
         names = names.split(',');
+        names.push(Meteor.user()._id); 
+        console.log(names);
         Meteor.call("invitePeople",names,Session.get("roomInvite"), function (error, result) {
                 console.log(result);
                 console.log(error);

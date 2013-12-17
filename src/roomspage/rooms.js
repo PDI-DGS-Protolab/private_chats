@@ -5,15 +5,13 @@ if (Meteor.isClient) {
     return Meteor.user().profile.fullname;
   };
 
-  Template.rooms.rooms=function(){
-    Meteor.call("getRooms",Meteor.userId(), function (error, result) {
-            console.log(result);
-          
-            return result;
+  Template.rooms.rooms = function(){
+     Meteor.call("roomsUser",Meteor.user()._id, function (error, result) {
+          console.log(result);
+          console.log(JSON.stringify(result));
+          Session.set("salas", result);
       });
-    // if (localStorage.servers == null) return  new Array();
-
-    // else return JSON.parse(localStorage.servers);
+     return Session.get("salas");
   };
 
   resolveUrl = function (e) {

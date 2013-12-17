@@ -23,6 +23,7 @@ if (Meteor.isServer) {
           return Rooms.find();
       },
       'invitePeople' : function(names,room) {
+          var x = 0;
           names.forEach(function(entry) {
             if(entry != '') {
               //TINDRIEM QUE CONSULTAR SI EXSISTEIX EL USER
@@ -30,8 +31,19 @@ if (Meteor.isServer) {
                 user_id: entry,
                 room_id: room,
               });
+              x = x+1;
             }
           });
+          return x;
+      },
+      'roomsUser' : function(id) {
+        var rooms = Rights.find({user_id:id},{}).fetch();
+        var myRooms = new Array();
+        rooms.forEach(function(entry) {
+          var room = Rooms.find({_id:entry.room_id}).fetch();
+          myRooms.push(room[0]);
+        });
+        return myRooms;
       }
   });
 }

@@ -13,9 +13,9 @@
         <tr>
             <td>
               <div class="divTextRoom">
-                <a id="{{server}}" class="nameRoom">{{serverName}}</a>
+                <a id="{{url}}" class="nameRoom">{{name}}</a>
                 <br>
-                <a id="{{server}}" class="urlRoom">{{server}}</a>
+                <a id="{{url}}" class="urlRoom">{{url}}</a>
               </div>
               <div class="divDelRoom">
                 <button id="{{server}}" class="delRoom">X</button>
@@ -39,7 +39,4 @@
 
     </table>
   </div>
-  {{#each urls}}
-        {{name}} : localhost:3000/room/{{_id}}<br><br>
-      {{/each}}
 </template>
