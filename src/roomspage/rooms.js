@@ -2,7 +2,7 @@
 if (Meteor.isClient) {
   
   Template.rooms.user = function(){
-    return "Pepe" //Meteor.user().profile.fullname;
+    return Meteor.user().profile.fullname;
   };
 
   Template.rooms.rooms = function(){
