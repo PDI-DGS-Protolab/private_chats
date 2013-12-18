@@ -18,7 +18,7 @@ if (Meteor.isClient) {
           var roomUrl = newUrl.value + "/room/" + key;
           if(key != ''){
             //modificar localStore por el token user;
-            AddRoom(key,newName,roomUrl,localStorage.name);
+            AddRoom(key,newName,roomUrl,Meteor.user()._id);
             Router.go('guest');
           }
           else {            
@@ -35,7 +35,6 @@ if (Meteor.isClient) {
       //console.log(roomUrl);
       //console.log(user_id);
       Meteor.call("addNewRoom",key,newName.value,roomUrl,user_id, function (error, result) {
-            console.log(result);
             Session.set("roomInvite", result);
       });
   };

@@ -57,6 +57,7 @@ if (Meteor.isClient) {
       },
       'click button.inviteMoreButton': function () {
         inviteOne(false);
+
       },
       'click a.backButton': function () {
         Router.go('rooms');
