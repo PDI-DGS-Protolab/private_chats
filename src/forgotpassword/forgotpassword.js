@@ -1,25 +1,18 @@
 if (Meteor.isClient) {
-
-  /*
-    http://docs.meteor.com/#template_currentuser
-    http://blog.benmcmahen.com/post/41741539120/building-a-customized-accounts-ui-for-meteor
-  */
   Template.forgotpassword.events({
     'submit #recovery-form': function (e, t) {
-      console.log('here comes the function');
       e.preventDefault();
       var _email = document.getElementById('username').value;
       if (_email != null) {
-        Session.set('loading', true);
+        //Accounts.sendResetPasswordEmail(_email);
         Accounts.forgotPassword({email: _email}, function(err){
           if (err) {
-            // Inform the user that account creation failed
-            console.log(err.reason);
+            alert(err.reason);
           }
           else {
-            alert("An Email has been send to " + _email);
+            alert("An Email has been send to " + _email +
+                  "\nFollow the instructions");
           }
-          Session.set('loading', false);
         });
       }
     },
@@ -33,23 +26,26 @@ if (Meteor.isClient) {
         document.getElementById('userpass').placeholder = "The passwords do not match";
         return;
       }
+      _key = sessionStorage.PrivChatsRstPass;
+      sessionStorage.removeItem('PrivChatsRstPass');
       if (_password != '') {
-        Session.set('loading', true);
-        Accounts.resetPassword(Session.get('resetPassword'), _password, function(err){
-          if (err)
-            console.log(err.reason);
-          else {
-            Session.set('resetPassword', null);
+        Accounts.resetPassword(_key, _password, function(err){
+          if (err) {
+            console.log(_key + " is not valid");
+            Router.go('login');
           }
-          Session.set('loading', false);
+          else {
+            Router.go('rooms');
+          }
         });
       }
     }
   });
 
   Template.forgotpassword.helpers({
-    resetPassword : function(t) {
-      return Session.get('resetPassword');
+    resetPassword: function (t) {
+      return sessionStorage.PrivChatsRstPass != null;
     }
   });
+
 }
