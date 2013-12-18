@@ -50,7 +50,22 @@ if (Meteor.isServer) {
           myRooms.push(room[0]);
         });
         return myRooms;
-      }
+      },
+      'getRoomIdAuth' : function(roomUrl,roomId) {
+
+        console.log(roomUrl);
+        console.log(roomId);
+
+        var room = Rooms.find(
+          { 
+            url: roomUrl,
+            room_id:roomId
+          } 
+        ).fetch();
+
+        console.log(JSON.stringify(room));
+        return JSON.stringify(room);
+      },
   });
 }
 
