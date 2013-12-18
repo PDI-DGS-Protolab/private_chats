@@ -15,10 +15,11 @@ if (Meteor.isClient) {
           // The user might not have been found, or their passwword
           // could be incorrect. Inform the user that their
           // login attempt has failed.
-          document.getElementById('username').value = null;
-          document.getElementById('username').placeholder = 'Wrong username/email';
-          document.getElementById('userpass').value = null;
-          document.getElementById('userpass').placeholder = 'Or wrong passwword';
+          
+          //document.getElementById('username').value = null;
+          document.getElementById('errorMessage').innerHTML = 'Error: Invalid username/email or password';
+          //document.getElementById('userpass').value = null;
+          //document.getElementById('userpass').placeholder = 'Or wrong passwword';
         }
         else {
           Router.go('rooms');

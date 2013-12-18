@@ -60,6 +60,20 @@ if (Meteor.isServer) {
         console.log(JSON.stringify(room));
         return JSON.stringify(room);
       },
+      'checkEmailInUsers': function(email){
+        var size=Meteor.users.find().count();
+        var check=false;
+        var users=Meteor.users.find().fetch()
+        var mail;
+        for(var i=0;i<size;++i){
+
+          mail=users[i].emails[0].address;
+          if(mail==email){
+            check = true;
+          }
+        }
+        return check;
+      },
   });
 }
 

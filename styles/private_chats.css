@@ -140,7 +140,7 @@ a.backButton span {
 }
 
 
-button.centerButton,button.createButton,button.joinButton {        
+button.centerButton,button.createButton,button.joinButton,button.inviteOneButton,button.inviteMoreButton {        
     border-color: #0078de;
     background: -moz-linear-gradient(-45deg, #0078de 0%, #005195 100%);
     background: -o-linear-gradient(-45deg, #0078de 0%, #005195 100%);
@@ -166,7 +166,7 @@ button.centerButton,button.createButton,button.joinButton {
     width: 90%;
     height: 50px;
 }
-button.createButton,button.joinButton{
+button.createButton,button.joinButton,button.inviteOneButton,button.inviteMoreButton{
     margin:0 0 0 0;
     min-width: 100px;
 }
@@ -178,17 +178,20 @@ table.center{
 }
 
 
-button.centerButton:hover,button.centerButton:focus,button.createButton:hover,button.createButton:focus,button.joinButton:hover,button.joinButton:focus {
+button.centerButton:hover,button.centerButton:focus,button.createButton:hover,button.createButton:focus,button.joinButton:hover,button.joinButton:focus,button.inviteOneButton:hover,
+button.inviteOneButton:focus,button.inviteMoreButton:hover,button.inviteMoreButton:focus {
     background: -moz-linear-gradient(-45deg, #005195 0%, #0078de 100%);
     background: -o-linear-gradient(-45deg,  #005195 0%, #0078de 100%);
     background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #005195), color-stop(100%, #0078de));
     background: -webkit-linear-gradient(-45deg,  #005195 0%, #0078de 100%);
     background: linear-gradient(-45deg, #005195 0%, #0078de 100%);
 }
-button.centerButton:active,button.createButton:active,button.joinButton:active {
+button.centerButton:active,button.createButton:active,button.joinButton:active,button.inviteOneButton:active,button.inviteMoreButton:active {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
 }
-
+button.inviteMoreButton,button.inviteOneButton{
+    width:auto;
+}
 .delRoom{
     border-color: #b50007;
     background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
@@ -309,6 +312,16 @@ a.delRoom:hover, a.delRoom:focus {
 {
     color: #339;
     background: #d0dafd;
+}
+
+#errorMessage{
+    color:red;
+    font-weight:bold;
+}
+
+#successMessage{
+    color:green;
+    font-weight:bold;
 }
 
 

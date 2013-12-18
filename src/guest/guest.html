@@ -3,12 +3,17 @@
         <div class="divButtonBack">
             <a class="backButton" ><span>Back</span></a>    
         </div>
-        <div class="titleBox">time to invite your friends!</div>
+        <div class="titleBox">Time to invite your friends!</div>
     </div>
     <div class="centerBox" style="padding-top:15%;">
         <center>
+            <span id="successMessage"></span><br>
+            <span id="errorMessage"></span><br>
             <input class="inputLogin" id="invited" placeholder="Email of your friend" type="text"/>
-            <button type="submit" class="centerButton">Invite</button>
+            <table>
+                <td><button type="submit" class="inviteOneButton">Invite and leave</button></td>
+                <td><button type="submit" class="inviteMoreButton">Invite and continue</button></td>
+            </table>
         </center>
     </div>
 </template>
