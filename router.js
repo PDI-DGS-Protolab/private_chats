@@ -32,7 +32,7 @@ Router.map( function () {
     //       }
     //       }
     //   });
-    // },
+    },
 
    data: function () {
      var params = this.params;
