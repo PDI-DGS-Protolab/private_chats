@@ -8,26 +8,42 @@ function checkEmail(email) {
     return true;
 }
 
-function inviteOne(){
+function inviteOne(exit){
   var newMail= document.getElementById('invited');
   var mailValue = newMail.value;
-  Session.set('newEmail',mailValue);
   if(!checkEmail(newMail)){
+    document.getElementById('successMessage').innerHTML = '';
     document.getElementById('errorMessage').innerHTML = 'Please enter a correct email address';
     document.getElementById('invited').value = null;
   }
   else{
     Meteor.call("checkEmailInUsers", mailValue, function (error, result) {
-      Session.set('userExistance',result);
+      if(result!=null){
+        Meteor.call("checkEmailAllreadyInRoom", result, Session.get("roomInvite") , function (error, result) {
+          if(!result){  
+            Meteor.call("invitePeople",result,Session.get("roomInvite"), function (error, result) {
+            });
+            if(exit){
+              Router.go('rooms');
+            }
+            else{
+              document.getElementById('invited').value = null;
+              document.getElementById('errorMessage').innerHTML = '';
+              document.getElementById('successMessage').innerHTML = mailValue+' can now enter to your chat room';
+            }
+          }
+          else{
+            document.getElementById('errorMessage').innerHTML = mailValue+' allready in this room';
+            document.getElementById('successMessage').innerHTML = '';
+          }
+        });
+      }
+      else{
+            document.getElementById('successMessage').innerHTML = '';
+            document.getElementById('errorMessage').innerHTML = 'This email are not registered yet';
+            document.getElementById('invited').value = null;
+      }
     });
-    if(Session.get('userExistance')){
-      Meteor.call("invitePeople",mailValue,Session.get("roomInvite"), function (error, result) {
-      });
-    }
-    else{
-      document.getElementById('errorMessage').innerHTML = 'This email are not registered yet';
-      document.getElementById('invited').value = null;
-    }
   }
 }
 
@@ -37,20 +53,10 @@ if (Meteor.isClient) {
 
   Template.guest.events({
       'click button.inviteOneButton': function () {
-        inviteOne();
-        if(Session.get('userExistance')){
-          Router.go('rooms');
-        }
-        Session.set('userExistance',false);
+        inviteOne(true);
       },
       'click button.inviteMoreButton': function () {
-        inviteOne();
-        if(Session.get('userExistance')){
-          document.getElementById('invited').value = null;
-          document.getElementById('errorMessage').innerHTML = '';
-          document.getElementById('successMessage').innerHTML = Session.get('newEmail')+' inserted in '+Session.get("roomInvite");
-        }
-        Session.set('userExistance',false);
+        inviteOne(false);
       },
       'click a.backButton': function () {
         Router.go('rooms');

@@ -28,19 +28,17 @@ if (Meteor.isServer) {
       'getRooms' : function(){
           return Rooms.find();
       },
-      'invitePeople' : function(names,room) {
-          var x = 0;
-          names.forEach(function(entry) {
-            if(entry != '') {
+      'invitePeople' : function(nameId,room) {
+          var res;
+          if(nameId != '') {
               //TINDRIEM QUE CONSULTAR SI EXSISTEIX EL USER
-              Rights.insert({
-                user_id: entry,
+              res = Rights.insert({
+                user_id: nameId,
                 room_id: room,
               });
-              x = x+1;
-            }
-          });
-          return x;
+          }
+          
+          return res;
       },
       'roomsUser' : function(id) {
         var rooms = Rights.find({user_id:id},{}).fetch();
@@ -68,17 +66,30 @@ if (Meteor.isServer) {
       },
       'checkEmailInUsers': function(email){
         var size=Meteor.users.find().count();
-        var check=false;
-        var users=Meteor.users.find().fetch()
+        var check=-1;
+        var users=Meteor.users.find().fetch();
         var mail;
         for(var i=0;i<size;++i){
 
           mail=users[i].emails[0].address;
           if(mail==email){
-            check = true;
+            check = i;
           }
         }
-        return check;
+        if(check!=-1){
+          return users[check]._id;
+        }
+        else{
+         return null;
+        }
+      },
+      'checkEmailAllreadyInRoom' : function(userid,roomid){
+        var right=Rights.find().count();
+        var res=false;
+        if(right==undefined){
+          res=true;
+        }
+        return right;
       },
   });
 }
