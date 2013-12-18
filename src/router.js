@@ -10,6 +10,22 @@ Router.map( function () {
   });
 
   this.route('forgotpassword',{
+    path: 'forgotpassword/:key',
+    action: function() {
+      _key = this.params.key;
+      if (_key != null) {
+        sessionStorage.PrivChatsRstPass = _key;
+      }
+      this.render();
+    }
+  });
+
+  this.route('forgotpassword',{
+    path: 'forgotpassword',
+    action: function() {
+      sessionStorage.removeItem('PrivChatsRstPass');
+      this.render();
+    }
   });
 
   this.route('rooms', {

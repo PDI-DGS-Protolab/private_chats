@@ -4,7 +4,13 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
+    Accounts.emailTemplates.resetPassword.text = function(user, url) {
+      old_url = url;
+      key = url.substring(url.lastIndexOf('/')+1);
+      url = url.replace('#/reset-password', 'forgotpassword');
+      return "Hello,\n" + "To reset your password, simply click the link below.\n"
+             + url + "\nThanks.";
+    };
   });
 
   Meteor.methods({
