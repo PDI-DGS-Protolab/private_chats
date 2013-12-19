@@ -52,7 +52,7 @@ if (Meteor.isServer) {
         if (room[0].userOwner == id) {
           myRooms.push({"url":[room[0].url],"name":[room[0].name],"roomId":[entry.room_id],"rights":[1]});
         } else {
-          myRooms.push({"url":[room[0].url],"name":[room[0].name],"roomId":[entry.room_id],"rights":[1]});
+          myRooms.push({"url":[room[0].url],"name":[room[0].name],"roomId":[entry.room_id]});
         }
       });
       return myRooms;
