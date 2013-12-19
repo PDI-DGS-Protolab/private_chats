@@ -3,48 +3,37 @@ Router.map( function () {
   this.route('messagesList', {
     path: '/room/:_room',
     action: function(){
-
-      var params = this.params;
-      var keyUser = this.params.user;
-      var keyRoom = this.params.roomAuth;
-      //TODO : uncomment 12-34 when authserver part is ready
-      //TODO : check fullURL 
-
-    //   var fullURL='http://localhost:3000'+'/check?user='+keyUser+'?roomAuth'+keyRoom;
-
-    //   Meteor.call('remoteGet',fullURL,{}, function (error, result) {
-        
-    //     if(error) {
-    //       window.alert("Can not conect to the server");
-    //       console.log(error);
-    //     } else {
-    //       key = result.content;
-    //       if(key != ''){
-    //         localStorage.name = key.value;
-    //         localStorage.keyRoom = this.params._room;
-    //          if (KeysRooms.find({_id: params._room}).count() == 0) {
-    //           this.render('roomNotFound');
-    //           this.stop();
-    //         }
-    //       }
-    //       else {
-    //         //show ACCESS DENIED page
-    //       }
-    //       }
-    //   });
-    },
-
-   data: function () {
-     var params = this.params;
-     if (params.userName != '' && params.userName != null) {
-       localStorage.name = params.userName;
-     }
-     localStorage.keyRoom = this.params._room;
-     if (KeysRooms.find({_id: params._room}).count() == 0) {
-       this.render('roomNotFound');
-       this.stop();
-     }
-   }
+      var user = this.params.usr;
+      var keyRoom = this.params._room;
+      var tokenAuth = this.params.tok;
+      if (user != '' && user != null && keyRoom != null && tokenAuth != null) {
+        sessionStorage.key = keyRoom;
+        console.log('OK ' + keyRoom);
+      }
+      else {
+        this.render('roomNotFound');
+        this.stop();
+      }
+      if (KeysRooms.find({_id: keyRoom}).count() == 0) {
+        this.render('roomNotFound');
+        this.stop();
+      }
+      var ENDPOINT = 'http://localhost:3000/check';
+      var conect = ENDPOINT + '?ku=' + user + '&kr=' + tokenAuth;
+      Meteor.call('remoteGet', conect, {}, function (error, result) {
+        console.log(result.headers);
+        if(error) {
+          window.alert("Can not conect to the server");
+          console.log(error);
+        } else {
+          if (result == null || result.content == '') {
+            Router.go('roomNotFound');
+          }
+          sessionStorage.name = result.content;
+        }
+      });
+      this.render();
+    }
   });
 
   this.route('name', {
@@ -62,6 +51,9 @@ Router.map( function () {
       this.response.setHeader('Content-Type', 'application/json');
       this.response.end(_key);
     }
+  });
+
+  this.route('roomNotFound', {
   });
 
 });

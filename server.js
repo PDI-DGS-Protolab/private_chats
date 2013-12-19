@@ -5,35 +5,25 @@ if (Meteor.isClient) {
   });
 
   Template.messagesList.messages = function(){
-    if (localStorage.id != undefined) {
-      Meteor.call("getUser",localStorage.id, function (error, result) {
-            Session.set("contadorUser", result.cont);
-      }); 
-    }
-    var actRoom = localStorage.keyRoom;
-    var num = Session.get("contadorUser");
-    return Messages.find({cont: {$gt: num}, room: actRoom},{sort : {cont: 1}});
+    var actRoom = sessionStorage.key;
+    return Messages.find({room: actRoom},{sort : {cont: 1}});
   };
 
   Template.messagesList.roomName =  function () {
-    var n = (KeysRooms.find({_id: localStorage.keyRoom})).fetch();
-    if (n[0].name == '') return 'Name not found';
-    return n[0].name;
-  };
-
-  // Sets into the localstorege the name contained into the cookie
-  getCookie =  function(e) {
-    var username = document.cookie;
-    var getCookieResult = username.split("nameForChatApp=");
-    var clearedName = getCookieResult[1].split(";");
-    setSessionAndId();      
-    var name = clearedName[0];
-    localStorage.name = name;
-    return name;
+   /* Meteor.call('getRoomName', function (error, result) {
+      if(error) {
+        return "ERROR";
+      } else {
+        return result;
+      }
+    });*/
+    return sessionStorage.roomName;
+    //console.log(KeysRooms.find({_id: sessionStorage.key}));
+    //return KeysRooms.findOne({_id: sessionStorage.key}).name;
   };
 
   setSessionAndId = function(){
-      Meteor.call("getCountMessages", function (error, result) {
+    Meteor.call("getCountMessages", function (error, result) {
       if (localStorage.id == undefined){
         var id = Users.insert({
           'name': clearedName[0],
@@ -46,15 +36,13 @@ if (Meteor.isClient) {
   };
 
   Template.messagesList.user = function(e){
-    //getCookie(e);
-    setSessionAndId();
-    return localStorage.name;
+    return sessionStorage.name;
   };
 
   resolveClick = function () {
-    var newName= localStorage.name;
-    var actRoom = localStorage.keyRoom;
-    var newText= document.getElementById('newtext');
+    var newName = sessionStorage.name;
+    var actRoom = sessionStorage.key;
+    var newText = document.getElementById('newtext');
     var contador = Messages.find({room: actRoom},{sort : {cont: 1}}).count();
     Meteor.call("getServerTime", function (error, result) {
           Session.set("time", result);
@@ -106,6 +94,12 @@ Meteor.publish('UserCont', function (user_id) {
     },
     getUser : function(id){
       return Users.findOne({_id:id});
+    },
+    'remoteGet' : function(url,options){
+      return HTTP.get(url,options);
+    },
+    'getRoomName' : function () {
+      return KeysRooms.findOne({_id: sessionStorage.key}).name;
     }
   });
 }
