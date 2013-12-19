@@ -12,6 +12,7 @@ if (Meteor.isClient) {
       });
      return Session.get("salas");
   };
+  
 
 
   goToUrl = function (e) {

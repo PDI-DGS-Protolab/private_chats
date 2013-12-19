@@ -52,7 +52,7 @@ if (Meteor.isServer) {
         if (room[0].userOwner == id) {
           myRooms.push({"url":[room[0].url],"name":[room[0].name],"roomId":[entry.room_id],"rights":[1]});
         } else {
-          myRooms.push({"url":[room[0].url],"name":[room[0].name],"roomId":[entry.room_id],"rights":[1]});
+          myRooms.push({"url":[room[0].url],"name":[room[0].name],"roomId":[entry.room_id]});
         }
       });
       return myRooms;
@@ -102,11 +102,10 @@ if (Meteor.isServer) {
       },
       'checkEmailAllreadyInRoom' : function(userid,roomid){
         var right=Rights.find({user_id:userid, room_id:roomid}).count();
-        var res=true;
-        if(right==undefined){
-          res=false;
+        if(right == 0){
+          return false;
         }
-        return res;
+        return true;
       },
       'getRoomUrl' : function(roomToken) {
         var room = Rooms.findOne({_id: roomToken});
