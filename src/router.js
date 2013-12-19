@@ -68,24 +68,20 @@ Router.map( function () {
     }
   });
 
-  this.route('check', {
+
+  this.route('null', {
     path: 'check',
-    autorender: false,
+    where: 'server',
     action: function () {
-      var params = this.params;
-      var keyUser = this.params.user;
-      var keyRoom = this.params.roomAuth;
-      var userName ='';
-      //TODO : rights check
-      //if has rights to enter -> respond with userName
-      // if(Rights.find({user: keyUser, roomAuth: keyRoom}).count() != 0){
-      //   this.response.setHeader('Content-Type', 'application/json');
-      //   this.response.end(userName);
-      // }
-      // else{//if not -> respond with empty string
-        this.response.setHeader('Content-Type', 'application/json');
-        this.response.end('Ola');
-      //}
+      var keyUser = this.params.ku;
+      var keyRoom = this.params.kr;
+      this.response.setHeader('Content-Type', 'application/json');
+      if(Rights.find({user_id: keyUser, room_id: keyRoom}).count() > 0) {
+        this.response.end(Meteor.users.findOne({_id: keyUser}).username);
+      }
+      else {
+        this.response.end();
+      }
     }
   })
 
