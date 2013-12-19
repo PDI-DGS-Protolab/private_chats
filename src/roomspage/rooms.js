@@ -77,6 +77,11 @@ if (Meteor.isClient) {
 
         Meteor.call("deleteRoom",idRoom, Meteor.user()._id,function (error, result) {});
         location.reload(true);
+      },
+      'click button.addPeople':function(e){
+        var idRoom = e.currentTarget.id;
+        Session.set("roomInvite", idRoom);
+        Router.go('guest');
       }
   });
 
