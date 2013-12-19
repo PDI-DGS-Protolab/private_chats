@@ -19,9 +19,10 @@ function inviteOne(exit){
   else{
     Meteor.call("checkEmailInUsers", mailValue, function (error, result) {
       if(result!=null){
+        var result2 = result;
         Meteor.call("checkEmailAllreadyInRoom", result, Session.get("roomInvite") , function (error, result) {
           if(!result){  
-            Meteor.call("invitePeople",result,Session.get("roomInvite"), function (error, result) {
+            Meteor.call("invitePeople",result2,Session.get("roomInvite"), function (error, result) {
             });
             if(exit){
               Router.go('rooms');

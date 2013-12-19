@@ -102,11 +102,10 @@ if (Meteor.isServer) {
       },
       'checkEmailAllreadyInRoom' : function(userid,roomid){
         var right=Rights.find({user_id:userid, room_id:roomid}).count();
-        var res=true;
-        if(right==undefined){
-          res=false;
+        if(right == 0){
+          return false;
         }
-        return res;
+        return true;
       }
   });
 }
