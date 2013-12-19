@@ -7,16 +7,21 @@ if (Meteor.isClient) {
 
 
   Template.rooms.rooms = function(){
-     Meteor.call("roomsUser",Meteor.user()._id, function (error, result) {
+      Meteor.call("roomsUser", Meteor.user()._id, function (error, result) {
           Session.set("salas", result);
       });
      return Session.get("salas");
   };
 
 
-  resolveUrl = function (e) {
-    var url = e.currentTarget.id + '?userName=' + localStorage.name;
-    window.location.href = "http://"+url;
+  goToUrl = function (e) {
+    console.log(e.currentTarget);
+    var idauth = e.currentTarget.id;
+    var tuser = Meteor.user()._id;
+    Meteor.call('getRoomUrl', idauth, function (error, result) {
+      var fullUrl = 'http://' + result + '?usr=' + tuser + '&tok=' + idauth;
+      window.location.href = fullUrl;
+    });
   }
 
   var getSegment = function (url, index) {
@@ -38,7 +43,10 @@ if (Meteor.isClient) {
         Meteor.logout();
         Router.go('login');
       },
-      'click a.urlRoom': function (e) {
+      'click div.divTextRoom' : function(e) {
+        goToUrl(e);
+      },
+/*      'click a.urlRoom': function (e) {
         //resolveUrl(e);
         //TODO : properly assign user token authRoom parameters
 
@@ -71,7 +79,7 @@ if (Meteor.isClient) {
       },
       'click a.nameRoom': function (e) {
         resolveUrl(e);
-      },
+      },*/
       'click button.delRoom':function(e){
         var idRoom = e.currentTarget.id;
 

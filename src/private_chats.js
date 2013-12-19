@@ -81,7 +81,7 @@ if (Meteor.isServer) {
         }
         return;
     },
-      'checkEmailInUsers': function(email){
+    'checkEmailInUsers': function(email){
         var size=Meteor.users.find().count();
         var check=-1;
         var users=Meteor.users.find().fetch();
@@ -107,6 +107,10 @@ if (Meteor.isServer) {
           res=false;
         }
         return res;
+      },
+      'getRoomUrl' : function(roomToken) {
+        var room = Rooms.findOne({_id: roomToken});
+        return room.url;
       }
   });
 }
