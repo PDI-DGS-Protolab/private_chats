@@ -18,7 +18,10 @@
                 <a id="{{url}}" class="urlRoom">{{url}}</a>
               </div>
               <div class="divDelRoom">
-                <button id="{{roomId}}" class="delRoom">X</button>
+                <button id="{{roomId}}" class="delRoom">Delete Room</button>
+                {{#if rights}}
+                  <button id="{{roomId}}" class="addPeople">Invite People</button>
+                {{/if}}
               </div>              
             </td>
         </tr>
