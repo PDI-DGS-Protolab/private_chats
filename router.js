@@ -18,7 +18,7 @@ Router.map( function () {
         this.render('roomNotFound');
         this.stop();
       }
-      var ENDPOINT = 'http://localhost:3000/check';
+      var ENDPOINT = 'http://authserver.meteor.com/check';
       var conect = ENDPOINT + '?ku=' + user + '&kr=' + tokenAuth;
       Meteor.call('remoteGet', conect, {}, function (error, result) {
         console.log(result.headers);

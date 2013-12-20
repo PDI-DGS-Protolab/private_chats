@@ -10,16 +10,14 @@ if (Meteor.isClient) {
   };
 
   Template.messagesList.roomName =  function () {
-   /* Meteor.call('getRoomName', function (error, result) {
-      if(error) {
-        return "ERROR";
-      } else {
-        return result;
-      }
-    });*/
-    return sessionStorage.roomName;
-    //console.log(KeysRooms.find({_id: sessionStorage.key}));
-    //return KeysRooms.findOne({_id: sessionStorage.key}).name;
+    if (KeysRooms.findOne({_id: sessionStorage.key}) != undefined) {
+      return KeysRooms.findOne({_id: sessionStorage.key}).name;
+    }
+  };
+
+
+  Template.messagesList.user = function(){
+    return sessionStorage.name;
   };
 
   setSessionAndId = function(){
@@ -35,9 +33,6 @@ if (Meteor.isClient) {
     });
   };
 
-  Template.messagesList.user = function(e){
-    return sessionStorage.name;
-  };
 
   resolveClick = function () {
     var newName = sessionStorage.name;
@@ -77,13 +72,6 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
-
-  // server-side publish
-Meteor.publish('UserCont', function (user_id) {
-  if (someServerMethodThatValidatesUserId(user_id))
-    // publish a single user object to the client
-    return Users.find({_id: user_id});
-});
 
   Meteor.methods({
     getServerTime: function () {
