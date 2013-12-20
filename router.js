@@ -1,27 +1,34 @@
 Router.map( function () {
 
-  this.route('messagesList', {
+  this.route('loading', {
     path: '/room/:_room',
-    action: function(){
+    action: function() {
+      Session.set('isLoading', true);
+      this.render('loading');
       var user = this.params.usr;
       var keyRoom = this.params._room;
       var tokenAuth = this.params.tok;
       if (user != '' && user != null && keyRoom != null && tokenAuth != null) {
         sessionStorage.key = keyRoom;
-        console.log('OK ' + keyRoom);
       }
       else {
         this.render('roomNotFound');
+        Session.set('isLoading', false);
         this.stop();
       }
       if (KeysRooms.find({_id: keyRoom}).count() == 0) {
         this.render('roomNotFound');
+        Session.set('isLoading', false);
         this.stop();
       }
-      var ENDPOINT = 'http://localhost:3000/check';
+
+      Future = Npm.require('fibers/future');
+      var myFuture = new Future();
+
+      var ENDPOINT = 'http://authserver.meteor.com/check';
       var conect = ENDPOINT + '?ku=' + user + '&kr=' + tokenAuth;
+      var ok = false;
       Meteor.call('remoteGet', conect, {}, function (error, result) {
-        console.log(result.headers);
         if(error) {
           window.alert("Can not conect to the server");
           console.log(error);
@@ -29,10 +36,18 @@ Router.map( function () {
           if (result == null || result.content == '') {
             Router.go('roomNotFound');
           }
-          sessionStorage.name = result.content;
+          else {
+            ok = true;
+            sessionStorage.name = result.content;
+          }
         }
+        myFuture.return(results);
+        Session.set('isLoading', false);
       });
-      this.render();
+      myFuture.wait();
+      //this.render('messagesList');
+      if (ok) this.render('messagesList');
+      else this.render('roomNotFound');
     }
   });
 
