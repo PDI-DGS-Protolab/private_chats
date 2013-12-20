@@ -21,13 +21,10 @@ Router.map( function () {
         Session.set('isLoading', false);
         this.stop();
       }
-<<<<<<< HEAD
 
       Future = Npm.require('fibers/future');
       var myFuture = new Future();
 
-=======
->>>>>>> ac9e4f46f388e522cd6c622582579e646d9c67f3
       var ENDPOINT = 'http://authserver.meteor.com/check';
       var conect = ENDPOINT + '?ku=' + user + '&kr=' + tokenAuth;
       var ok = false;
@@ -48,7 +45,6 @@ Router.map( function () {
         Session.set('isLoading', false);
       });
       myFuture.wait();
-      //this.render('messagesList');
       if (ok) this.render('messagesList');
       else this.render('roomNotFound');
     }
