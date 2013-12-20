@@ -34,7 +34,6 @@ Router.map( function () {
           console.log(error);
         } else {
           if (result == null || result.content == '') {
-            Router.go('roomNotFound');
           }
           else {
             ok = true;
