@@ -55,5 +55,10 @@ Router.map( function () {
 
   this.route('roomNotFound', {
   });
+});
 
+
+Router.configure({
+  notFoundTemplate: 'notfound',
+  loadingTemplate: 'loading'
 });
