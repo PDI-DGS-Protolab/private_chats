@@ -40,7 +40,7 @@ Router.map( function () {
             sessionStorage.name = result.content;
           }
         }
-        myFuture.return(results);
+        myFuture.return(result);
         Session.set('isLoading', false);
       });
       myFuture.wait();
