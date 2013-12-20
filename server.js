@@ -15,7 +15,14 @@ if (Meteor.isClient) {
   };
 
   Template.messagesList.roomName =  function () {
-    return sessionStorage.roomName;
+    if (KeysRooms.findOne({_id: sessionStorage.key}) != undefined) {
+      return KeysRooms.findOne({_id: sessionStorage.key}).name;
+    }
+  };
+
+
+  Template.messagesList.user = function(){
+    return sessionStorage.name;
   };
 
   setSessionAndId = function(){
@@ -31,9 +38,6 @@ if (Meteor.isClient) {
     });
   };
 
-  Template.messagesList.user = function(e){
-    return sessionStorage.name;
-  };
 
   resolveClick = function () {
     var newName = sessionStorage.name;
