@@ -5,13 +5,19 @@
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
         "branch": "dev"
-      }
+      },
+      "npm": {}
     },
     "packages": {
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
         "branch": "dev",
-        "commit": "47e1ed3f995c393fb37a9b4e86b9aeca10c6e631"
+        "commit": "7b57d5ae8bc6ec31ddf1f44fd8ecdcfa5bdd119e"
+      },
+      "npm": {
+        "git": "https://github.com/arunoda/meteor-npm.git",
+        "tag": "v0.2.6",
+        "commit": "177ab6118de5bf8cffb19481343d5762ff7a2aaf"
       }
     }
   }

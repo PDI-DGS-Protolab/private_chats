@@ -31,7 +31,12 @@ Router.map( function () {
   this.route('rooms', {
     path: 'rooms',
     before: function () {
-      if (!Meteor.user()) {
+      var ok = false;
+      if (Meteor.user()) {
+        ok = true;
+      }
+      if (!ok) {
+        console.log("adeuu");
         this.render('login');
         this.stop();
       }

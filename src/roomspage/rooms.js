@@ -49,9 +49,9 @@ if (Meteor.isClient) {
       },
       'click button.delRoom':function(e){
         var idRoom = e.currentTarget.id;
-
         Meteor.call("deleteRoom",idRoom, Meteor.user()._id,function (error, result) {});
-        location.reload(true);
+        Router.go('rooms')
+        //location.reload(true);
       },
       'click button.addPeople':function(e){
         var idRoom = e.currentTarget.id;
