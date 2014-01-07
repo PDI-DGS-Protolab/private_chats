@@ -31,14 +31,19 @@ Router.map( function () {
   this.route('rooms', {
     path: 'rooms',
     before: function () {
-      var ok = false;
-      if (Meteor.user()) {
-        ok = true;
-      }
-      if (!ok) {
-        console.log("adeuu");
-        this.render('login');
-        this.stop();
+
+      console.log(Session.get("DeleteNoLogout"));
+      if (!Session.get("DeleteNoLogout")){
+        console.log(Session.get("DeleteNoLogout"));
+        if (!Meteor.user()) {
+          console.log("adeuu");
+          this.render('login');
+          this.stop();
+        }
+      } else {
+        console.log("olaaa");
+        console.log(Session.get("DeleteNoLogout"));
+        //Session.set('DeleteNoLogout', null)
       }
     }
   });
