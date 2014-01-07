@@ -65,6 +65,11 @@
       "sourceMapRoot": "packages"
     },
     {
+      "path": "packages/follower-livedata.js",
+      "sourceMap": "packages/follower-livedata.js.map",
+      "sourceMapRoot": "packages"
+    },
+    {
       "path": "packages/application-configuration.js",
       "sourceMap": "packages/application-configuration.js.map",
       "sourceMapRoot": "packages"

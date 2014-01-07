@@ -1,5 +1,10 @@
 /* Imports for global scope */
 
+RouteController = Package['iron-router'].RouteController;
+Route = Package['iron-router'].Route;
+Router = Package['iron-router'].Router;
+HTTP = Package.http.HTTP;
+Async = Package.npm.Async;
 Meteor = Package.meteor.Meteor;
 WebApp = Package.webapp.WebApp;
 main = Package.webapp.main;
@@ -15,4 +20,5 @@ Match = Package.check.Match;
 _ = Package.underscore._;
 Random = Package.random.Random;
 EJSON = Package.ejson.EJSON;
+Accounts = Package['accounts-base'].Accounts;
 

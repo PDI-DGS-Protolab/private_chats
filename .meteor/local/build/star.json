@@ -1,6 +1,6 @@
 {
   "format": "site-archive-pre1",
-  "builtBy": "Meteor 0.6.6.3",
+  "builtBy": "Meteor 0.7.0",
   "programs": [
     {
       "name": "client",
@@ -18,5 +18,6 @@
       "path": "programs/ctl/start.sh"
     }
   ],
-  "control": "ctl"
+  "control": "ctl",
+  "meteorRelease": "0.7.0"
 }
