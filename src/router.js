@@ -73,7 +73,6 @@ Router.map( function () {
     }
   });
 
-
   this.route('null', {
     path: 'check',
     where: 'server',
@@ -89,5 +88,9 @@ Router.map( function () {
       }
     }
   })
+});
 
+Router.configure({
+  notFoundTemplate: 'notfound',
+  loadingTemplate: 'loading'
 });
