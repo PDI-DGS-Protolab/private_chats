@@ -1,0 +1,399 @@
+.topBar {
+    background: #005195;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 15px;
+    padding: 10px;
+    min-height: 32px;
+    color:black;
+    text-align:center;
+    display: block;
+    left: 0;
+    position: fixed;
+    top: 0;
+    vertical-align: baseline;
+    width: 100%;
+}
+
+.titleBox{
+    float:center;
+    padding:8px 8px 8px 8px;
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    position: center;
+}
+
+.divButtonBack{
+    float:left;
+}
+
+.divButtonCreate{
+    float:left;
+}
+
+.divButtonJoin{
+    float:right;
+}
+
+
+.divRoomTable{
+    float:center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.textMessage{
+    padding: 2px;
+    font-size: 15px;
+    height: 100%;
+    width: 100%;
+}
+button.sendButton{
+    height: 100%;
+    width: 100%;
+    font-size: 15px;
+    border-color: #b50007;
+    background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
+    background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 0.25em;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    color: white;
+}
+
+a.backButton {
+    background: #950006;
+    background: -moz-linear-gradient(top, #de0009 0%, #950006 100%);
+    background: -o-linear-gradient(top, #de0009 0%, #950006 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
+    background: -webkit-linear-gradient(top, #de0009 0%, #950006 100%);
+    background: linear-gradient(top, #de0009 0%, #950006 100%);
+    border: solid #dd0009;
+    border-width: 1px 1px 1px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    margin-left: 20px;
+    margin-right: 2px;
+    padding: 0 7px 0 3px;
+    position: relative;
+    text-decoration: none;
+}
+
+a.backButton:before {
+    background: #950006;
+    background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
+    background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    border: solid #dd0009;
+    border-width: 0 0 1px 1px;
+    border-radius: 2px 0 2px 2px;
+    content: '';
+    display: block;
+    height: 21px;
+    left: -11px;
+    position: absolute;
+    top: 3px;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 21px;
+}
+
+a.backButton:hover, a.backButton:focus {
+    border-color: #b50007;
+    background: #7e0004;
+    background: -moz-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: -o-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b50007), color-stop(100%, #7e0004));
+    background: -webkit-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: linear-gradient(top, #b50007 0%, #7e0004 100%);
+}
+
+a.backButton:hover:before, a.backButton:focus:before {
+    border-color: #b50007;
+    background: #7e0004;
+    background: -moz-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+    background: -o-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #b50007), color-stop(100%, #7e0004));
+    background: -webkit-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+    background: linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+}
+
+a.backButton span {
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+}
+
+
+button.centerButton,button.createButton,button.joinButton,button.inviteOneButton,button.inviteMoreButton {        
+    border-color: #0078de;
+    background: -moz-linear-gradient(-45deg, #0078de 0%, #005195 100%);
+    background: -o-linear-gradient(-45deg, #0078de 0%, #005195 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #0078de), color-stop(100%, #005195));
+    background: -webkit-linear-gradient(-45deg, #0078de 0%, #005195 100%);
+    background: linear-gradient(-45deg, #0078de 0%, #005195 100%);
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 0.25em;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 0.5em 0.5em 0 0;
+    padding: 0.25em 1em;
+    text-align: center;
+    white-space: nowrap;
+    background-color:  #0080ff;
+    color: white;
+    width: 90%;
+    height: 50px;
+}
+button.createButton,button.joinButton,button.inviteOneButton,button.inviteMoreButton{
+    margin:0 0 0 0;
+    min-width: 100px;
+}
+
+table.center{
+    text-align:center;
+    margin-left:5px; 
+    margin-right:5px;
+}
+
+
+button.centerButton:hover,button.centerButton:focus,button.createButton:hover,button.createButton:focus,button.joinButton:hover,button.joinButton:focus,button.inviteOneButton:hover,
+button.inviteOneButton:focus,button.inviteMoreButton:hover,button.inviteMoreButton:focus {
+    background: -moz-linear-gradient(-45deg, #005195 0%, #0078de 100%);
+    background: -o-linear-gradient(-45deg,  #005195 0%, #0078de 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #005195), color-stop(100%, #0078de));
+    background: -webkit-linear-gradient(-45deg,  #005195 0%, #0078de 100%);
+    background: linear-gradient(-45deg, #005195 0%, #0078de 100%);
+}
+button.centerButton:active,button.createButton:active,button.joinButton:active,button.inviteOneButton:active,button.inviteMoreButton:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+}
+button.inviteMoreButton,button.inviteOneButton{
+    width:auto;
+}
+.delRoom{
+    border-color: #b50007;
+    background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
+    background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    background: linear-gradient(-45deg, #de0009 0%, #950006 100%);
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    padding: 6px 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    float:right;
+    background-color:  #0080ff;
+    color: white;
+}
+
+.addPeople{
+    border-color: #007A00;
+    background: -moz-linear-gradient(-45deg, #007A00 0%, #007A00 100%);
+    background: -o-linear-gradient(-45deg, #007A00 0%, #007A00 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #007A00), color-stop(100%, #007A00));
+    background: -webkit-linear-gradient(-45deg, #007A00 0%, #007A00 100%);
+    background: linear-gradient(-45deg, #007A00 0%, #007A00 100%);
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    padding: 6px 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.1) inset;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    float:right;
+    background-color:  #0080ff;
+    color: white;
+}
+
+
+a.delRoom:hover, a.delRoom:focus {
+    border-color: #b50007;
+    background: #7e0004;
+    background: -moz-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: -o-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b50007), color-stop(100%, #7e0004));
+    background: -webkit-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: linear-gradient(top, #b50007 0%, #7e0004 100%);
+}
+
+.centerBox{
+    width: 99%;
+    text-align:center;
+    padding-top:50%;
+}
+
+.bottomBar{
+    background: #c7d7ff;
+    height: auto;
+    color:black;
+    text-align:center;
+    display: block;
+    left: 0;
+    position: fixed;
+    bottom: 0;
+    vertical-align: baseline;
+    width: 100%;
+}
+
+.inputLogin{
+    margin:5px 5px 5px 5px;
+    width:90%;
+    padding: 10px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.nameRoom {
+    font-weight: bold;
+    font-size: 15px;  
+    cursor:pointer;
+}
+
+.urlRoom {
+    font-size: 10px;
+    cursor:pointer;
+}
+
+.divTextRoom {
+    float:left;
+
+}
+
+.divTextMessage{
+    float: left;
+    min-width: 70%;
+    width: 80%;
+    margin: 2px;
+}
+
+.divSendButton {
+    float: right;
+    min-width: 55px;
+    width: 15%;
+    margin: 2px;
+}
+
+.divDelRoom {
+    float:right;
+}
+
+
+#newspaper-a
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    width: 100%;
+    text-align: left;
+
+}
+
+#newspaper-a td
+{
+    padding: 7px 17px 7px 17px;
+    color: #669;
+    border-bottom: 1px solid #434346;
+}
+
+#newspaper-a tbody tr:nth-child(even) td
+{
+    background: #e8edff; 
+}
+
+#newspaper-a tbody tr:hover td
+{
+    color: #339;
+    background: #d0dafd;
+}
+
+#errorMessage{
+    color:red;
+    font-weight:bold;
+}
+
+#successMessage{
+    color:green;
+    font-weight:bold;
+}
+
+
+/*SPECIFIC CSS For iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+
+.messageBox{}
+.liRooms{}
+.liMessages{}
+.createButton{}
+.joinButton{}
+.centerButton{}
+.sendButton{}
+}
+
+/*SPECIFIC CSS For Mobile (portrait and landscape)*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+.topBar{
+    background: #950051;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 15px;
+    padding: 10px;
+    min-height: 30px;
+    color:black;
+    text-align:center;
+    display: block;
+    left: 0;
+    position: fixed;
+    top: 0;
+    vertical-align: baseline;
+    width: 100%;
+    margin-bottom:20px;
+}
+
+.titleBox{
+
+}
+
+.centerBox{}
+.bottomBar{}
+.messageBox{}
+.liRooms{}
+.liMessages{}
+.createButton{}
+.joinButton{}
+.centerButton{}
+.sendButton{}
+}
+
