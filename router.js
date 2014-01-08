@@ -1,6 +1,6 @@
 Router.map( function () {
 
-  this.route('loading', {
+  this.route('messagesList', {
     path: '/room/:_room',
     action: function() {
       Session.set('isLoading', true);
@@ -22,10 +22,7 @@ Router.map( function () {
         this.stop();
       }
 
-      Future = Npm.require('fibers/future');
-      var myFuture = new Future();
-
-      var ENDPOINT = 'http://authserver.meteor.com/check';
+      var ENDPOINT = Meteor.settings.public.endpoint;
       var conect = ENDPOINT + '?ku=' + user + '&kr=' + tokenAuth;
       var ok = false;
       Meteor.call('remoteGet', conect, {}, function (error, result) {
@@ -34,18 +31,15 @@ Router.map( function () {
           console.log(error);
         } else {
           if (result == null || result.content == '') {
+            Router.go('roomNotFound');
           }
           else {
-            ok = true;
             sessionStorage.name = result.content;
           }
         }
-        myFuture.return(result);
         Session.set('isLoading', false);
       });
-      myFuture.wait();
-      if (ok) this.render('messagesList');
-      else this.render('roomNotFound');
+      this.render();
     }
   });
 

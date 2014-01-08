@@ -1,0 +1,5 @@
+{
+	"public" : {
+       "endpoint" : AUTH_ENDPOINT
+    }
+}
