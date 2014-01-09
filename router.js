@@ -2,45 +2,64 @@ Router.map( function () {
 
   this.route('messagesList', {
     path: '/room/:_room',
-    action: function() {
+    before: function () {
       Session.set('isLoading', true);
-      this.render('loading');
+      this.render();
+    },
+    action: function() {
       var user = this.params.usr;
       var keyRoom = this.params._room;
       var tokenAuth = this.params.tok;
+      var ENDPOINT = Meteor.settings.public.endpoint;
+      var conect = ENDPOINT + '/check?ku=' + user + '&kr=' + tokenAuth;
+
       if (user != '' && user != null && keyRoom != null && tokenAuth != null) {
         sessionStorage.key = keyRoom;
       }
       else {
-        this.render('roomNotFound');
-        Session.set('isLoading', false);
-        this.stop();
+        this.redirect('roomNotFound');
+        return;
       }
-      if (KeysRooms.find({_id: keyRoom}).count() == 0) {
-        this.render('roomNotFound');
-        Session.set('isLoading', false);
-        this.stop();
-      }
+      var calls = 0;
+      var call1 = null;
+      var call2 = null;
+      Meteor.call('existsRoom', keyRoom, function (error, result) {
+        if (error) {
+          console.log(error);
+        }
+        else if (result != 0) {
+          call1 = result;
+        }
 
-      var ENDPOINT = Meteor.settings.public.endpoint;
-      var conect = ENDPOINT + '?ku=' + user + '&kr=' + tokenAuth;
-      var ok = false;
+        if (++calls == 2) {
+          if (call1 != null && call2 != null) {
+            Session.set('isLoading', false);
+          }
+          else {
+            Router.go('roomNotFound');
+          }
+        }
+      });
       Meteor.call('remoteGet', conect, {}, function (error, result) {
         if(error) {
           window.alert("Can not conect to the server");
           console.log(error);
-        } else {
-          if (result == null || result.content == '') {
-            Router.go('roomNotFound');
+        } 
+        else if (result != null && result.content != '') {
+          sessionStorage.name = result.content;
+          call2 = result.content;
+        }
+
+        if (++calls == 2) {
+          if (call1 != null && call2 != null) {
+            Session.set('isLoading', false);
           }
           else {
-            sessionStorage.name = result.content;
+            Router.go('roomNotFound');
           }
         }
-        Session.set('isLoading', false);
-      });
-      this.render();
-    }
+      });   
+    },
   });
 
   this.route('name', {
@@ -63,7 +82,6 @@ Router.map( function () {
   this.route('roomNotFound', {
   });
 });
-
 
 Router.configure({
   notFoundTemplate: 'notfound',

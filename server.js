@@ -1,7 +1,7 @@
 if (Meteor.isClient) {
 
   Template.messagesList.helpers({
-      messagesList: function() { 
+      messagesList: function () { 
         return Messages.find({},{sort :{cont: 1}}); 
       },
       isLoading: function () {
@@ -9,19 +9,19 @@ if (Meteor.isClient) {
       }
   });
 
-  Template.messagesList.messages = function(){
+  Template.messagesListLoad.messages = function (){
     var actRoom = sessionStorage.key;
     return Messages.find({room: actRoom},{sort : {cont: 1}});
   };
 
-  Template.messagesList.roomName =  function () {
+  Template.messagesListLoad.roomName =  function () {
     if (KeysRooms.findOne({_id: sessionStorage.key}) != undefined) {
       return KeysRooms.findOne({_id: sessionStorage.key}).name;
     }
   };
 
 
-  Template.messagesList.user = function(){
+  Template.messagesListLoad.user = function (){
     return sessionStorage.name;
   };
 
@@ -60,7 +60,7 @@ if (Meteor.isClient) {
     }
   };
 
-  Template.messagesList.events({
+  Template.messagesListLoad.events({
       'keydown input#newtext' : function(event){
       if(event.which == 13){ //13 == Enter key event
         resolveClick();
@@ -71,6 +71,13 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.roomNotFound.events({
+    'click a#backbutton': function () {
+      var ENDPOINT = Meteor.settings.public.endpoint;
+      var fullUrl = ENDPOINT + "/rooms";
+      window.location.href = fullUrl;
+    }
+  });
 }
 
 if (Meteor.isServer) {
@@ -93,6 +100,9 @@ if (Meteor.isServer) {
     },
     'getRoomName' : function () {
       return KeysRooms.findOne({_id: sessionStorage.key}).name;
-    }
+    },
+    'existsRoom' : function (keyRoom) {
+      return KeysRooms.find({_id: keyRoom}).count();
+    },
   });
 }

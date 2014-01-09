@@ -1,4 +1,12 @@
 <template name="messagesList">
+  {{#if isLoading}}
+    {{>loading}}
+  {{else}}
+    {{>messagesListLoad}}
+  {{/if}}
+</template>
+
+<template name="messagesListLoad">
   <div class="topBar">
     <div class="divButtonBack">
         <a class="backButton" href="#" onclick="goBack();return false;"><span>Back</span></a>
