@@ -11,6 +11,7 @@ if (Meteor.isServer) {
       return "Hello,\n" + "To reset your password, simply click the link below.\n"
              + url + "\nThanks.";
     };
+
   });
 
   Meteor.methods({

@@ -2,7 +2,12 @@ Router.map( function () {
 
   // Routing to the homepage
   this.route('login', {
-    path: '/'
+    path: '/',
+    before: function() {
+      if(Meteor.user()) {
+        this.redirect('rooms');
+      }
+    }
   });
 
   this.route('signup', {
@@ -30,52 +35,59 @@ Router.map( function () {
 
   this.route('rooms', {
     path: 'rooms',
-    before: function () {
+     waitOn: function() {
+            return userDocHandle
+        },
 
-      console.log(Session.get("DeleteNoLogout"));
-      if (!Session.get("DeleteNoLogout")){
-        console.log(Session.get("DeleteNoLogout"));
-        if (!Meteor.user()) {
-          console.log("adeuu");
-          this.render('login');
-          this.stop();
+        onAfterRun: function() {
+            if(!Meteor.user()) {
+                this.render('login');
+                this.stop();
+            }
         }
-      } else {
-        console.log("olaaa");
-        console.log(Session.get("DeleteNoLogout"));
-        //Session.set('DeleteNoLogout', null)
-      }
-    }
+
   });
 
   this.route('guest', {
     path: 'guest',
-    before: function () {
-      if (!Meteor.user()) {
-        this.render('login');
-        this.stop();
-      }
-    }
+    waitOn: function() {
+            return userDocHandle
+        },
+
+        onAfterRun: function() {
+            if(!Meteor.user()) {
+                this.render('login');
+                this.stop();
+            }
+        }
   });
 
   this.route('joinroom', {
     path: 'join-room',
-    before: function () {
-      if (!Meteor.user()) {
-        this.render('login');
-        this.stop();
-      }
-    }
+    waitOn: function() {
+            return userDocHandle
+        },
+
+        onAfterRun: function() {
+            if(!Meteor.user()) {
+                this.render('login');
+                this.stop();
+            }
+        }
   });
 
   this.route('createroom', {
     path: 'create-room',
-    before: function () {
-      if (!Meteor.user()) {
-        this.render('login');
-        this.stop();
-      }
-    }
+    waitOn: function() {
+            return userDocHandle
+        },
+
+        onAfterRun: function() {
+            if(!Meteor.user()) {
+                this.render('login');
+                this.stop();
+            }
+        }
   });
 
   this.route('null', {
@@ -86,6 +98,7 @@ Router.map( function () {
       var keyRoom = this.params.kr;
       this.response.setHeader('Content-Type', 'application/json');
       if(Rights.find({user_id: keyUser, room_id: keyRoom}).count() > 0) {
+        console.log(Meteor.users.findOne({_id: keyUser}).username);
         this.response.end(Meteor.users.findOne({_id: keyUser}).username);
       }
       else {
@@ -99,3 +112,13 @@ Router.configure({
   notFoundTemplate: 'notfound',
   loadingTemplate: 'loading'
 });
+
+userDocHandle = {
+    ready: function () {
+        if(Meteor.user()) {
+            return true;
+        }
+        return false;
+    }
+};
+
