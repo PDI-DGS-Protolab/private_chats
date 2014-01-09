@@ -2,12 +2,7 @@ Router.map( function () {
 
   // Routing to the homepage
   this.route('login', {
-    path: '/',
-    before: function() {
-      if(Meteor.user()) {
-        this.redirect('rooms');
-      }
-    }
+    path: '/'
   });
 
   this.route('signup', {
@@ -35,59 +30,55 @@ Router.map( function () {
 
   this.route('rooms', {
     path: 'rooms',
-     waitOn: function() {
-            return userDocHandle
+    waitOn: function() {
+            return userDocHandle 
         },
-
-        onAfterRun: function() {
-            if(!Meteor.user()) {
+    action: function() {
+        if(!Meteor.user()) {
                 this.render('login');
-                this.stop();
-            }
         }
+        else this.render();
+    }
 
   });
 
   this.route('guest', {
     path: 'guest',
     waitOn: function() {
-            return userDocHandle
+            return userDocHandle 
         },
-
-        onAfterRun: function() {
-            if(!Meteor.user()) {
+    action: function() {
+        if(!Meteor.user()) {
                 this.render('login');
-                this.stop();
-            }
         }
+        else this.render();
+    }
   });
 
   this.route('joinroom', {
     path: 'join-room',
     waitOn: function() {
-            return userDocHandle
+            return userDocHandle 
         },
-
-        onAfterRun: function() {
-            if(!Meteor.user()) {
+    action: function() {
+        if(!Meteor.user()) {
                 this.render('login');
-                this.stop();
-            }
         }
+        else this.render();
+    }
   });
 
   this.route('createroom', {
     path: 'create-room',
     waitOn: function() {
-            return userDocHandle
+            return userDocHandle 
         },
-
-        onAfterRun: function() {
-            if(!Meteor.user()) {
+    action: function() {
+        if(!Meteor.user()) {
                 this.render('login');
-                this.stop();
-            }
         }
+        else this.render();
+    }
   });
 
   this.route('null', {
@@ -115,10 +106,9 @@ Router.configure({
 
 userDocHandle = {
     ready: function () {
-        if(Meteor.user()) {
-            return true;
-        }
+        if(Meteor.subscribe('userReady').ready()) return true;
         return false;
     }
 };
+
 

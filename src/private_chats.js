@@ -14,6 +14,10 @@ if (Meteor.isServer) {
 
   });
 
+  Meteor.publish("userReady", function () {
+    return Meteor.users.find({_id: this.userId},{fields: {'profile': 1}});
+  });
+
   Meteor.methods({
     'remoteGet' : function(url,options){
       return HTTP.get(url,options);
@@ -60,8 +64,6 @@ if (Meteor.isServer) {
     },
     'getRoomIdAuth' : function(roomUrl,roomId) {
 
-      console.log(roomUrl);
-      console.log(roomId);
 
       var room = Rooms.find(
         { 
@@ -70,7 +72,6 @@ if (Meteor.isServer) {
         } 
       ).fetch();
 
-      console.log(JSON.stringify(room));
       return JSON.stringify(room);
     },
     'deleteRoom' : function(roomId,userId) {

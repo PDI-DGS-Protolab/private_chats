@@ -16,7 +16,6 @@ if (Meteor.isClient) {
 
 
   goToUrl = function (e) {
-    console.log(e.currentTarget);
     var idauth = e.currentTarget.id;
     var tuser = Meteor.user()._id;
     Meteor.call('getRoomUrl', idauth, function (error, result) {
