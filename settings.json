@@ -1,5 +1,5 @@
 {
 	"public" : {
-       "endpoint" : "http://authserver2.meteor.com"
+       "endpoint" : AUTH_ENDPOINT
     }
 }
