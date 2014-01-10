@@ -12,15 +12,15 @@
         {{#each rooms}}
         <tr>
             <td>
-              <div id="{{roomId}}" class="divTextRoom">
+              <div id="{{_id}}" class="divTextRoom">
                 <a class="nameRoom">{{name}}</a>
                 <br>
                 <a class="urlRoom">{{url}}</a>
               </div>
               <div class="divDelRoom">
-                <button id="{{roomId}}" class="delRoom">Delete Room</button>
-                {{#if rights}}
-                  <button id="{{roomId}}" class="addPeople">Invite People</button>
+                <button id="{{_id}}" class="delRoom">Delete Room</button>
+                {{#if imOwner userOwner }}
+                  <button id="{{_id}}" class="addPeople">Invite People</button>
                 {{/if}}
               </div>              
             </td>

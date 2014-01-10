@@ -1,7 +1,3 @@
-if (Meteor.isClient) {
-
-}
-
 if (Meteor.isServer) {
   Meteor.startup(function () {
     Accounts.emailTemplates.resetPassword.text = function(user, url) {
@@ -11,11 +7,19 @@ if (Meteor.isServer) {
       return "Hello,\n" + "To reset your password, simply click the link below.\n"
              + url + "\nThanks.";
     };
-
   });
 
   Meteor.publish("userReady", function () {
     return Meteor.users.find({_id: this.userId},{fields: {'profile': 1}});
+  });
+
+  Meteor.publish("myRooms", function () {
+    var rooms = Rights.find({ user_id: this.userId }).fetch();
+    var ids = new Array();
+    rooms.forEach( function( entry ) {
+      ids.push(entry.room_id);
+    });
+    return Rooms.find({_id: { $in: ids } }, { fields: { room_id: 0 } });
   });
 
   Meteor.methods({
@@ -38,7 +42,7 @@ if (Meteor.isServer) {
     'getRooms' : function(){
         return Rooms.find();
     },
-    'invitePeople' : function(nameId,room) {
+    'invitePeople' : function(nameId, room) {
           var res;
           if(nameId != '') {
               //TINDRIEM QUE CONSULTAR SI EXSISTEIX EL USER
@@ -49,22 +53,7 @@ if (Meteor.isServer) {
           }
           return res;
       },
-    'roomsUser' : function(id) {
-      var rooms = Rights.find({user_id:id},{}).fetch();
-      var myRooms = new Array();
-      rooms.forEach(function(entry) {
-        var room = Rooms.find({_id:entry.room_id}).fetch();
-        if (room[0].userOwner == id) {
-          myRooms.push({"url":[room[0].url],"name":[room[0].name],"roomId":[entry.room_id],"rights":[1]});
-        } else {
-          myRooms.push({"url":[room[0].url],"name":[room[0].name],"roomId":[entry.room_id]});
-        }
-      });
-      return myRooms;
-    },
-    'getRoomIdAuth' : function(roomUrl,roomId) {
-
-
+    'getRoomIdAuth': function(roomUrl, roomId) {
       var room = Rooms.find(
         { 
           url: roomUrl,
@@ -74,7 +63,7 @@ if (Meteor.isServer) {
 
       return JSON.stringify(room);
     },
-    'deleteRoom' : function(roomId,userId) {
+    'deleteRoom': function(roomId, userId) {
         if(Rooms.find({_id:roomId, userOwner:userId},{}).fetch().length == 1) {
           Rooms.remove({_id:roomId});
           Rights.remove({room_id:roomId});
@@ -102,17 +91,17 @@ if (Meteor.isServer) {
          return null;
         }
       },
-      'checkEmailAllreadyInRoom' : function(userid,roomid){
-        var right=Rights.find({user_id:userid, room_id:roomid}).count();
-        if(right == 0){
-          return false;
-        }
-        return true;
-      },
-      'getRoomUrl' : function(roomToken) {
-        var room = Rooms.findOne({_id: roomToken});
-        return room.url;
+    'checkEmailAllreadyInRoom' : function(userid,roomid){
+      var right=Rights.find({user_id:userid, room_id:roomid}).count();
+      if(right == 0){
+        return false;
       }
+      return true;
+    },
+    'getRoomUrl' : function(roomToken) {
+      var room = Rooms.findOne({_id: roomToken});
+      return room.url;
+    }
   });
 }
 

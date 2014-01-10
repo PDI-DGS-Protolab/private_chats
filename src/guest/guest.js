@@ -50,8 +50,6 @@ function inviteOne(exit){
 
 if (Meteor.isClient) {
 
-  console.log("here comes the cliente GUEST");
-
   Template.guest.events({
       'click button.inviteOneButton': function () {
         inviteOne(true);
