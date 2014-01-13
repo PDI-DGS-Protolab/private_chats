@@ -10,7 +10,7 @@ if (Meteor.isClient) {
       Meteor.call("roomsUser", Meteor.user()._id, function (error, result) {
           Session.set("salas", result);
       });
-     return Session.get("salas");
+      return Session.get("salas");
   };
   
 

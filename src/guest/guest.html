@@ -5,15 +5,33 @@
         </div>
         <div class="titleBox">Time to invite your friends!</div>
     </div>
-    <div class="centerBox" style="padding-top:15%;">
-        <center>
-            <span id="successMessage"></span><br>
-            <span id="errorMessage"></span><br>
-            <input class="inputLogin" id="invited" placeholder="Email of your friend" type="text"/>
-            <table>
-                <td><button type="submit" class="inviteOneButton">Invite and leave</button></td>
-                <td><button type="submit" class="inviteMoreButton">Invite and continue</button></td>
-            </table>
-        </center>
-    </div>
+    <div class="divRoomTable"> 
+    <table class="newspaper-a-table" summary="Available Rooms">
+      <tbody>
+        {{#each emailsUsers}}
+        <tr id="tr{{id}}" class="newspaper-a">
+            <td class="itemLine">
+              <div id="{{roomId}}" class="divTextRoom">
+                <div style="float:left">    
+                    <input type="checkbox" name="emailsCheck" class="emailsCheck" id="{{id}}">
+                </div>
+                <div style="float:left; padding-left:20px;">
+                    <a class="nameRoom">{{username}}</a>
+                    <br>
+                    <a class="urlRoom">{{email}}</a>
+                </div>
+              </div>       
+            </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="bottomBar">
+    <table class="center">
+      <td>
+          <button type="submit" class="inviteOneButton">Invite</button>
+      </td>
+    </table>
+  </div>
 </template>

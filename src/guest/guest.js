@@ -8,61 +8,73 @@ function checkEmail(email) {
     return true;
 }
 
-function inviteOne(exit){
-  var newMail= document.getElementById('invited');
-  var mailValue = newMail.value;
-  if(!checkEmail(newMail)){
-    document.getElementById('successMessage').innerHTML = '';
-    document.getElementById('errorMessage').innerHTML = 'Please enter a correct email address';
-    document.getElementById('invited').value = null;
+function inviteOne(emails){
+  for (var i = 0; i < emails.length; i++) {
+    Meteor.call("invitePeople",emails[i],Session.get("roomInvite"), function (error, result) {});
   }
-  else{
-    Meteor.call("checkEmailInUsers", mailValue, function (error, result) {
-      if(result!=null){
-        var result2 = result;
-        Meteor.call("checkEmailAllreadyInRoom", result, Session.get("roomInvite") , function (error, result) {
-          if(!result){  
-            Meteor.call("invitePeople",result2,Session.get("roomInvite"), function (error, result) {
-            });
-            if(exit){
-              Router.go('rooms');
-            }
-            else{
-              document.getElementById('invited').value = null;
-              document.getElementById('errorMessage').innerHTML = '';
-              document.getElementById('successMessage').innerHTML = mailValue+' can now enter to your chat room';
-            }
-          }
-          else{
-            document.getElementById('errorMessage').innerHTML = mailValue+' allready in this room';
-            document.getElementById('successMessage').innerHTML = '';
-          }
-        });
-      }
-      else{
-            document.getElementById('successMessage').innerHTML = '';
-            document.getElementById('errorMessage').innerHTML = 'This email are not registered yet';
-            document.getElementById('invited').value = null;
-      }
-    });
-  }
+  Router.go('rooms');
 }
 
 if (Meteor.isClient) {
 
-  console.log("here comes the cliente GUEST");
+    var emailsSelecteds = new Array();
+
+   Template.guest.emailsUsers = function(){
+      Meteor.call("emailsUsers", Meteor.user()._id, function (error, result) {
+        console.log(result);
+          Session.set("emails", result);
+      });
+      var usersEmails = new Array();
+      if (Session.get("emails") != undefined) {
+        for (var i = 0; i < Session.get("emails").length; i++) {
+          usersEmails.push({"username":Session.get("emails")[i].username,"email":Session.get("emails")[i].emails[0].address,"id":Session.get("emails")[i]._id});
+        }
+      }
+      return usersEmails;
+  };
+
 
   Template.guest.events({
-      'click button.inviteOneButton': function () {
-        inviteOne(true);
-      },
-      'click button.inviteMoreButton': function () {
-        inviteOne(false);
 
+      'click button.inviteOneButton': function () {
+        inviteOne(emailsSelecteds);
       },
       'click a.backButton': function () {
         Router.go('rooms');
+      },
+      'click input.emailsCheck' : function() {
+        var aux = 'tr'+this.id;
+        document.getElementById(this.id).checked = !document.getElementById(this.id).checked;
+        if (document.getElementById(this.id).checked) {
+          var index = emailsSelecteds.indexOf(this.id);
+          if (index <= -1) {
+              emailsSelecteds.push(this.id);
+          }
+          document.getElementById(aux).className="newspaper-a-checked";
+        } else {
+          var index = emailsSelecteds.indexOf(this.id);
+          if (index > -1) {
+              emailsSelecteds.splice(index, 1);
+          }
+          document.getElementById(aux).className="newspaper-a";
+        }
+      },
+      'click td.itemLine': function() {
+          var aux = 'tr'+this.id;
+          document.getElementById(this.id).checked = !document.getElementById(this.id).checked;
+          if (document.getElementById(this.id).checked) {
+            var index = emailsSelecteds.indexOf(this.id);
+            if (index <= -1) {
+                emailsSelecteds.push(this.id);
+            }
+            document.getElementById(aux).className="newspaper-a-checked";
+          } else {
+            var index = emailsSelecteds.indexOf(this.id);
+            if (index > -1) {
+                emailsSelecteds.splice(index, 1);
+            }
+            document.getElementById(aux).className="newspaper-a";
+          }
       }
-
   });
 }

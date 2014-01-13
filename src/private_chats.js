@@ -18,6 +18,15 @@ if (Meteor.isServer) {
     return Meteor.users.find({_id: this.userId},{fields: {'profile': 1}});
   });
 
+  Meteor.publish("roomsUser", function() {
+    console.log("roomsUser");
+    if (this.userId) {
+      console.log("userId no null");
+      return Rights.find({user_id:this.userId},{});
+    }
+    return null;
+  });
+
   Meteor.methods({
     'remoteGet' : function(url,options){
       return HTTP.get(url,options);
@@ -112,6 +121,9 @@ if (Meteor.isServer) {
       'getRoomUrl' : function(roomToken) {
         var room = Rooms.findOne({_id: roomToken});
         return room.url;
+      },
+      'emailsUsers' : function() {
+        return Meteor.users.find({_id:{$ne:this.userId}}).fetch();
       }
   });
 }
