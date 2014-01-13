@@ -89,7 +89,6 @@ Router.map( function () {
       var keyRoom = this.params.kr;
       this.response.setHeader('Content-Type', 'application/json');
       if(Rights.find({user_id: keyUser, room_id: keyRoom}).count() > 0) {
-        console.log(Meteor.users.findOne({_id: keyUser}).username);
         this.response.end(Meteor.users.findOne({_id: keyUser}).username);
       }
       else {

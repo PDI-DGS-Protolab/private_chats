@@ -1,7 +1,8 @@
-
 if (Meteor.isClient) {
+
+  var subscription;
   
-  Template.rooms.user = function(){
+  Template.rooms.user = function () {
     return Meteor.user().profile.fullname;
   };
 
@@ -11,23 +12,32 @@ if (Meteor.isClient) {
           Session.set("salas", result);
       });
       return Session.get("salas");
+   };
+
+  Template.rooms.imOwner = function (userID) {
+    return Meteor.user()._id == userID;
+  };
+
+  Template.rooms.rooms = function () {
+    subscription.ready();
+    return Rooms.find().fetch();
+  };
+
+  Template.rooms.created = function () {
+    subscription = Meteor.subscribe("myRooms");
   };
   
-
-
-  goToUrl = function (e) {
-    var idauth = e.currentTarget.id;
+  goToUrl = function (tok_Rooms) {
     var tuser = Meteor.user()._id;
-    Meteor.call('getRoomUrl', idauth, function (error, result) {
-      var fullUrl = 'http://' + result + '?usr=' + tuser + '&tok=' + idauth;
+    Meteor.call('getRoomUrl', tok_Rooms, function (error, result) {
+      var fullUrl = 'http://' + result + '?usr=' + tuser + '&tok=' + tok_Rooms;
       window.location.href = fullUrl;
     });
   }
 
-  var getSegment = function (url, index) {
+  getSegment = function (url, index) {
     return url.replace(/^https?:\/\//, '').split('/')[index];
   }
-
   
   Template.rooms.events({
      'click button.joinButton': function () {      
@@ -44,15 +54,12 @@ if (Meteor.isClient) {
         Router.go('login');
       },
       'click div.divTextRoom' : function(e) {
-        goToUrl(e);
+        goToUrl(e.currentTarget.id);
       },
       'click button.delRoom':function(e){
         var idRoom = e.currentTarget.id;
-        
         Session.set("DeleteNoLogout",1);
         Meteor.call("deleteRoom",idRoom, Meteor.user()._id,function (error, result) {});
-        //Router.go('rooms')
-        location.reload(true);
       },
       'click button.addPeople':function(e){
         var idRoom = e.currentTarget.id;
@@ -60,7 +67,4 @@ if (Meteor.isClient) {
         Router.go('guest');
       }
   });
-
-  
-
 }

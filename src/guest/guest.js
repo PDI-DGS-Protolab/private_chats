@@ -21,7 +21,6 @@ if (Meteor.isClient) {
 
    Template.guest.emailsUsers = function(){
       Meteor.call("emailsUsers", Meteor.user()._id, function (error, result) {
-        console.log(result);
           Session.set("emails", result);
       });
       var usersEmails = new Array();
