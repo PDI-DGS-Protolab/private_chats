@@ -6,14 +6,6 @@ if (Meteor.isClient) {
     return Meteor.user().profile.fullname;
   };
 
-
-  Template.rooms.rooms = function(){
-      Meteor.call("roomsUser", Meteor.user()._id, function (error, result) {
-          Session.set("salas", result);
-      });
-      return Session.get("salas");
-   };
-
   Template.rooms.imOwner = function (userID) {
     return Meteor.user()._id == userID;
   };
@@ -57,9 +49,13 @@ if (Meteor.isClient) {
         goToUrl(e.currentTarget.id);
       },
       'click button.delRoom':function(e){
+        console.log("CLICK BOTO");
         var idRoom = e.currentTarget.id;
         Session.set("DeleteNoLogout",1);
-        Meteor.call("deleteRoom",idRoom, Meteor.user()._id,function (error, result) {});
+        console.log(idRoom + "  " + Meteor.user()._id);
+        Meteor.call("deleteRoom", idRoom, Meteor.user()._id, function(error, result) {
+          console.log(result);
+        });
       },
       'click button.addPeople':function(e){
         var idRoom = e.currentTarget.id;
