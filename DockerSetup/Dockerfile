@@ -6,6 +6,7 @@ ADD install_chat_server.sh install_chat_server.sh
 RUN chmod +x install_chat_server.sh
 RUN ./install_chat_server.sh
 RUN rm install_chat_server.sh
+RUN export $AUTH_ENDPOINT
 
 ADD execute.sh execute.sh
 RUN chmod +x execute.sh
