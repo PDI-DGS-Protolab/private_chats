@@ -11,4 +11,4 @@ RUN export $AUTH_ENDPOINT
 ADD execute.sh execute.sh
 RUN chmod +x execute.sh
 
-ENTRYPOINT . ./execute.sh
+ENTRYPOINT ./execute.sh
