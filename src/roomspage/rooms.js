@@ -49,18 +49,37 @@ if (Meteor.isClient) {
         goToUrl(e.currentTarget.id);
       },
       'click button.delRoom':function(e){
-        console.log("CLICK BOTO");
         var idRoom = e.currentTarget.id;
-        Session.set("DeleteNoLogout",1);
-        console.log(idRoom + "  " + Meteor.user()._id);
+        delsubs = Meteor.subscribe("roomDeleted");
         Meteor.call("deleteRoom", idRoom, Meteor.user()._id, function(error, result) {
-          console.log(result);
         });
+        console.log("READY go");
+        delsubs.ready();
+        location.reload(true);
+        console.log("READY ok");
       },
       'click button.addPeople':function(e){
         var idRoom = e.currentTarget.id;
         Session.set("roomInvite", idRoom);
         Router.go('guest');
       }
+  });
+}
+
+if (Meteor.isServer) {
+  Meteor.methods({
+    'deleteRoom': function(roomId, userId) {
+      if(Rooms.find({_id:roomId, userOwner:userId},{}).fetch().length == 1) {
+        Rooms.remove({_id:roomId});
+        Rights.remove({room_id:roomId});
+      }
+      else {
+        Rights.remove({room_id:roomId, user_id:userId});
+      }
+
+      Meteor.publish("roomDeleted", function () {
+        return Meteor.users.find({_id: this.userId},{fields: {'profile': 1}});
+      });
+    },
   });
 }

@@ -73,16 +73,6 @@ if (Meteor.isServer) {
 
       return JSON.stringify(room);
     },
-    'deleteRoom': function(roomId, userId) {
-      if(Rooms.find({_id:roomId, userOwner:userId},{}).fetch().length == 1) {
-        Rooms.remove({_id:roomId});
-        Rights.remove({room_id:roomId});
-      } else {
-        var tmp = Rights.find({room_id:roomId, user_id:userId}).fetch();
-        Rights.remove({room_id:roomId, user_id:userId});
-        return tmp;
-      }
-    },
     'checkEmailInUsers': function(email){
         var size=Meteor.users.find().count();
         var check=-1;
