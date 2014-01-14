@@ -1,7 +1,6 @@
 Private Chats - Master authServer
 =================================
-Master branch of the Authentication Server.
-
+Master branch of the Authentication Server. It contains Docker files to auto-deploy the project.
 For more information see the guide: http://goo.gl/C3mSHr
 ### Info in the guide about this server:
 	1.3.1 SERVIDOR DE AUTENTICACIÓN
