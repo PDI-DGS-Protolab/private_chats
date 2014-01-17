@@ -16,6 +16,7 @@ For more information see the guide: http://goo.gl/C3mSHr
 		> mrt add iron-router
 		> mrt add http
 		> mrt add accounts-password
+		> meteor remove autopublish
 
 	# Correr el servidor, por defecto corre en el puerto 3000.
 	# Con --port podemos especificar el número del puerto donde va a correr el servidor
