@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# Descargar el código del repositorio de github.
+# Download the code from the Github repository.
 git clone https://github.com/PDI-DGS-Protolab/private_chats.git chat_server
 cd chat_server
 git checkout master_chatServer
 git pull
 
-# Actualizar las dependencias del proyecto
+# Updating the project dependencies.
 mrt add iron-router
 mrt add http
 
 cd
 
-#Quickfix
+# Fixing the source code of meteor in order to avoid crashes.
 sed -i '452s/.*/files.rm_recursive(toDir);/' /.meteor/tools/0b2f28e18b/tools/files.js
 sed -i '450s/.*/var movedOldDir = false;/' /.meteor/tools/0b2f28e18b/tools/files.js
